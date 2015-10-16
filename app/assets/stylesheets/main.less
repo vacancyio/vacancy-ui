@@ -1,5 +1,5 @@
 body {
-  background: url(https://www.janestreet.com/wp-content/themes/janestreet/img/bg.gif);
+  background: #fafafa;
 
   font-size: 16px;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
@@ -7,25 +7,54 @@ body {
 
 }
 
-@brand: #ffa13f;
-@brand2: #67babe;
+@brand: #edae49;
+@hero: "https://wework-com.imgix.net/attachments/s3_images/000/000/311/original/20141015_South_Bank-107.jpg";
 
 #header {
-  background: #FFF;
-  height: 96px;
+  background: #333;
+  height: 72px;
+
+  h1 { float: left; }
+
+  ul { float: right; }
+
+  li { display: inline; line-height: 72px; margin: 0 0 0 24px; color: #999 }
+
+  a { color: #999; }
+
+  a:hover, a:active { color: white; }
 }
 
-nav { height: 48px; background: #555; }
+#header h1 { margin: 0 0 0 24px; font-size: 24px; line-height: 72px; padding: 0; color: white; }
 
-nav li { display: inline; color: #eee; line-height: 48px; margin: 0 0 0 24px; }
+ul { list-style: none; padding: 0; margin: 0; }
 
-#header h1 { margin: 0 0 0 24px; font-size: 24px; line-height: 96px; padding: 0; }
+a, a:hover { color: @brand; }
 
-#header li { display: inline; }
+.button {
+  padding: 24px 48px;
+  background: @brand;
+  color: white;
+  display: inline-block;
+  text-align: center;
+}
 
-ul { list-style: none; padding: 0; }
+#hero {
+  height: 700px;
+  background: #888 url(@hero) no-repeat bottom;
+  background-size: cover;
+  width: 100%;
+  overflow: hidden;
+  clear: both;
 
-a { color: @brand2; }
+  h1, h2 { color: white; text-align: center; }
+
+  h1 { padding-top: 96px; font-size: 48px; text-transform: uppercase; }
+
+  h2 { color: #AAA; }
+
+  .button { margin: 0 auto; }
+}
 
 #main {
   margin: 24px 0;
@@ -33,8 +62,8 @@ a { color: @brand2; }
   padding: 24px;
 }
 
-
-.search {
+.search-flags li {
+  display: inline;
 }
 
 .search input {
@@ -43,7 +72,6 @@ a { color: @brand2; }
 }
 
 .job {
-
   padding: 12px 0;
   border-bottom: 2px solid #ddd;
 }
