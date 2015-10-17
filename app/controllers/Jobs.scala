@@ -11,4 +11,8 @@ class Jobs extends Controller {
   def show(id: String) = Action {
     Ok(views.html.jobs.show(id))
   }
+
+  def create = Action {
+    Ok(views.html.jobs.create())
+  }
 }

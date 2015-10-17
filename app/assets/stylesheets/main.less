@@ -1,74 +1,37 @@
-body {
-  background: #fafafa;
-
-  font-size: 16px;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  color: #333;
-
-}
-
-@brand: #edae49;
-@hero: "https://wework-com.imgix.net/attachments/s3_images/000/000/311/original/20141015_South_Bank-107.jpg";
-
-#header {
-  background: #333;
-  height: 72px;
-
-  h1 { float: left; }
-
-  ul { float: right; }
-
-  li { display: inline; line-height: 72px; margin: 0 0 0 24px; color: #999 }
-
-  a { color: #999; }
-
-  a:hover, a:active { color: white; }
-}
-
-#header h1 { margin: 0 0 0 24px; font-size: 24px; line-height: 72px; padding: 0; color: white; }
-
-ul { list-style: none; padding: 0; margin: 0; }
-
-a, a:hover { color: @brand; }
-
-.button {
-  padding: 24px 48px;
-  background: @brand;
-  color: white;
-  display: inline-block;
-  text-align: center;
-}
+@import "core.less";
+@import "color.less";
+@import "structure.less";
 
 #hero {
   height: 700px;
-  background: #888 url(@hero) no-repeat bottom;
+  background: #888 url("http://41.media.tumblr.com/347c7e657b175a6336f2a1443cc39c16/tumblr_n1rtotqOVo1tubinno1_r1_1280.jpg") no-repeat center;
   background-size: cover;
   width: 100%;
   overflow: hidden;
   clear: both;
 
+  .overlay { position: absolute; background: rgba(0,0,0,.4); width: 100%; height: 700px; }
+  .content { z-index: 2; position: relative; padding: 200px 0; }
+
   h1, h2 { color: white; text-align: center; }
 
-  h1 { padding-top: 96px; font-size: 48px; text-transform: uppercase; }
+  h1 { font-size: 48px; text-transform: uppercase; }
+  h2 { color: #DDD; }
 
-  h2 { color: #AAA; }
+  .button { margin: 96px auto; display: block; width: 260px; }
+}
 
-  .button { margin: 0 auto; }
+.section {
+  padding: 48px 0;
+  text-align: center;
+
+  h2 { margin: 0 0 24px 0; }
 }
 
 #main {
   margin: 24px 0;
   background: white;
   padding: 24px;
-}
-
-.search-flags li {
-  display: inline;
-}
-
-.search input {
-  padding: 12px 24px;
-  width: 100%;
 }
 
 .job {

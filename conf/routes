@@ -7,6 +7,7 @@
 GET /                  controllers.Static.index
 
 GET     /jobs          controllers.Jobs.index
+GET     /jobs/create   controllers.Jobs.create
 GET     /jobs/:id      controllers.Jobs.show(id: String)
 
 GET    /promoted       controllers.Promoted.index
