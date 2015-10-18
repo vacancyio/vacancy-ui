@@ -1,0 +1,13 @@
+@(form: Form[forms.StandardJob])(implicit messages: Messages)
+
+@page("Create a job post") {
+
+  <h1>Standard</h1>
+
+  <p>Use the form below to post a new job. All jobs will be active for 30 days</p>
+
+  <div class="job-form">
+      @jobs.form(form)
+  </div>
+
+}

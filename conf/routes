@@ -1,15 +1,20 @@
-# Routes
-# This file defines all application routes (Higher priority routes first)
-# ~~~~
+# Jobs
+# =====================================================
 
-# Home page
+GET /                    controllers.Static.index
 
-GET /                  controllers.Static.index
+GET     /jobs            controllers.Jobs.index
+POST    /jobs            controllers.Jobs.create
 
-GET     /jobs          controllers.Jobs.index
-GET     /jobs/create   controllers.Jobs.create
-GET     /jobs/:id      controllers.Jobs.show(id: String)
+GET     /jobs/new        controllers.Jobs.selection
+GET     /jobs/standard   controllers.Jobs.standard
+GET     /jobs/promoted   controllers.Jobs.promoted
 
-GET    /promoted       controllers.Promoted.index
+GET     /jobs/:id        controllers.Jobs.show(id: String)
 
-GET     /assets/*file  controllers.Assets.versioned(path="/public", file: Asset)
+# Promoted
+# =====================================================
+GET    /promoted         controllers.Promoted.index
+
+# =====================================================
+GET     /assets/*file    controllers.Assets.versioned(path="/public", file: Asset)

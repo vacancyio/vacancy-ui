@@ -1,0 +1,58 @@
+@(form: Form[forms.StandardJob])(implicit messages: Messages)
+
+@helper.form(action = routes.Jobs.create) {
+
+<div class="field">
+    <label>Job Title</label>
+    <input type="text" placeholder="Senior software engineer"/>
+</div>
+
+<div class="field">
+    <label>Job Type</label>
+    <select>
+        <option>Perm</option>
+        <option>Contract</option>
+    </select>
+</div>
+
+<div class="field">
+    <label>Company Name</label>
+    <input type="text" placeholder="E.g Facebook"/>
+
+</div>
+
+<div class="field">
+    <label>Location</label>
+    <input type="text" placeholder="LA, California"/>
+
+</div>
+
+<div class="field">
+    <label>Salary (currency, min, max)</label>
+    <select>
+        <option>GBP</option>
+        <option>EU</option>
+        <option>USD</option>
+    </select>
+</div>
+
+<div class="field">
+    <label>Min Salary</label>
+    <input type="number"/>
+
+    <label>Max Salary</label>
+    <input type="number"/>
+</div>
+
+<div class="field">
+
+    <label>Technology (tags ruby, java etc)</label>
+    <input type="text" placeholder="ruby, java, sql"/>
+</div>
+
+<div class="field">
+    <label>Description (short job description</label>
+    <textarea></textarea>
+</div>
+
+}
