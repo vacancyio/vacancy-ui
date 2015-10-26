@@ -1,3 +1,5 @@
+@(jobs: Seq[model.Job])
+
 @page("Hiring") {
 
 <div class="search row">
@@ -7,52 +9,29 @@
     <div class="col-md-6">
         <input type="text" placeholder="Location e.g New York City"/>
     </div>
-    <!--<ul class="search-flags">-->
-    <!--<li><label>Remote</label><input type="checkbox" /></li>-->
-    <!--<li><label>Full time</label><input type="checkbox" /></li>-->
-    <!--<li><label>Contract</label><input type="checkbox" /></li>-->
-    <!--</ul>-->
 </div>
 
 <h2>Hiring</h2>
 
 <ul class="jobs">
-    @for(x <- 1 to 15) {
+
+    @jobs.map { job =>
     <li class="job">
         <div class="row">
             <div class="col-md-7">
-                <h4><a href="/jobs/1">OCaml Engineer</a></h4>
-                <h5>Facebook INC</h5>
+                <h4><a href="/jobs/1">@job.title</a></h4>
 
-                <p>Bank of America need a Scala engineer to work on foo bar baz</p>
+                <p>@job.description</p>
             </div>
             <div class="location col-md-2">
-                Palo Alto, California
+                @job.location()
             </div>
             <div class="meta col-md-3">
                 Scala, Java, Unix
-                <p>1 week ago</p>
+                <p>@job.created</p>
             </div>
         </div>
     </li>
-    <li class="job">
-        <div class="row">
-            <div class="col-md-7">
-                <h4><a href="/jobs/2">Senior Software Engineer</a></h4>
-                <h5>Jane Street</h5>
-
-                <p>Apple are hiring a functional programming to work on Haskell stuff</p>
-            </div>
-            <div class="col-md-2 location">
-                New York, US
-            </div>
-            <div class="col-md-3 meta">
-                Haskell, Clojure, Remote
-                <p>1 week ago</p>
-            </div>
-        </div>
-    </li>
-
     }
 </ul>
 

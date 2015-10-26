@@ -12,7 +12,7 @@ CREATE TABLE Jobs(
     company_name text,
     company_website text,
     city text,
-    country char(3) NOT NULL,
+    country char(2) NOT NULL,
     created TIMESTAMP WITH TIME ZONE NOT NULL,
     PRIMARY KEY (id)
 );

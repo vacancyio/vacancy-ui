@@ -1,23 +1,30 @@
 package controllers
 
-import forms._
+import model.JobPartial
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
-import play.api.Play.current
-import play.api.i18n.Messages.Implicits._
+import repository.JobRepository
+
 
 class Jobs extends Controller {
 
-  val form = Form(
+  private val jobForm = Form(
     mapping(
-      "title"   -> text,
-      "jobType" -> text
-    )(StandardJob.apply)(StandardJob.unapply)
+      "title"   -> nonEmptyText,
+      "description" -> nonEmptyText,
+      "skills" -> text,
+      "contract" -> number,
+      "companyName" -> optional(text),
+      "companyWebsite" -> optional(text),
+      "city" -> optional(text),
+      "country" -> text
+    )(JobPartial.apply)(JobPartial.unapply)
   )
 
   def index = Action {
-    Ok(views.html.jobs.index())
+    val jobs = JobRepository.all()
+    Ok(views.html.jobs.index(jobs))
   }
 
   def show(id: String) = Action {
@@ -29,15 +36,27 @@ class Jobs extends Controller {
   }
 
   def standard = Action {
-    Ok(views.html.jobs.standard(form))
+    Ok(views.html.jobs.standard(jobForm))
   }
 
   def promoted = Action {
     Ok(views.html.jobs.promoted())
   }
 
-  def create = Action { request =>
-    println(request)
-    Ok(request.toString())
+  def create = Action { implicit request =>
+    println(request.body)
+    jobForm.bindFromRequest.fold(
+      formWithErrors => {
+        println(formWithErrors)
+        Ok(views.html.jobs.standard(formWithErrors))
+          .flashing("error" -> "Form contains errors")
+      },
+      jobPartial => {
+        println(jobPartial)
+        JobRepository.insert(jobPartial) // TODO check for errors!
+        Redirect(routes.Jobs.index())
+       .flashing("success" -> "Job added successfully")
+      }
+    )
   }
 }

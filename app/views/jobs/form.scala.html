@@ -1,4 +1,4 @@
-@(form: Form[forms.StandardJob])(implicit messages: Messages)
+@(form: Form[model.JobPartial])
 
 @helper.form(action = routes.Jobs.create) {
 
@@ -9,34 +9,25 @@
 
         <div class="field">
             <label>Job Title</label>
-            <input type="text" placeholder="Senior software engineer"/>
+            <input type="text" name="title" placeholder="Senior software engineer"/>
         </div>
 
         <div class="field">
             <label>Description (short job description)</label>
-            <textarea></textarea>
+            <textarea name="description"></textarea>
         </div>
 
         <div class="field">
             <label>Skills and requirements</label>
-            <textarea></textarea>
+            <textarea name="skills"></textarea>
         </div>
-
-        <!--<div class="field">-->
-        <!--<label>Programming languages</label>-->
-        <!--<ul>-->
-        <!--@forms.data.Languages.all.map { language =>-->
-        <!--<li class="lang"><label>@language</label><input type="checkbox" name="languages[]" value="@language"></li>-->
-        <!--}-->
-        <!--</ul>-->
-        <!--</div>-->
 
         <div class="field">
             <label>Job Type</label>
             <ul class="contracts">
                 @model.ContractType.all.map { contract =>
                 <li class="radio">
-                    <input type="radio" name="contractType" value="@contract.intValue">
+                    <input type="radio" name="contract" value="@contract.intValue">
                     <span>@contract.name</span>
                 </li>
                 }
@@ -50,19 +41,19 @@
 
         <div class="field">
             <label>Company Name</label>
-            <input type="text" placeholder="E.g Facebook"/>
+            <input type="text" name="companyName" placeholder="E.g Facebook"/>
         </div>
 
         <div class="field">
             <label>Company Website</label>
-            <input type="text" placeholder="E.g https://pinterest.com/jobs"/>
+            <input type="text" name="companyWebsite" placeholder="E.g https://pinterest.com/jobs"/>
         </div>
 
         <h3>Location</h3>
 
         <div class="field">
             <label>City</label>
-            <input type="text" placeholder="e.g New York"/>
+            <input type="text" name="city" placeholder="e.g New York"/>
         </div>
 
         <div class="field">
