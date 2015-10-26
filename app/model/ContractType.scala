@@ -1,7 +1,6 @@
 package model
 
 object ContractType {
-
   def all = List(Perm, Contract, Freelance)
 
   def fromInt(n: Int): Option[ContractType] = n match {
@@ -10,13 +9,10 @@ object ContractType {
     case 3 => Some(Freelance)
     case _ => None
   }
-
 }
 
 sealed trait ContractType {
-
   val name: String
-
   val intValue: Int
 }
 
