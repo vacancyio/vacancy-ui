@@ -2,57 +2,79 @@
 
 @helper.form(action = routes.Jobs.create) {
 
-<div class="field">
-    <label>Job Title</label>
-    <input type="text" placeholder="Senior software engineer"/>
+<div class="row">
+    <div class="col-md-6">
+
+        <h3>About the role</h3>
+
+        <div class="field">
+            <label>Job Title</label>
+            <input type="text" placeholder="Senior software engineer"/>
+        </div>
+
+        <div class="field">
+            <label>Description (short job description)</label>
+            <textarea></textarea>
+        </div>
+
+        <div class="field">
+            <label>Skills and requirements</label>
+            <textarea></textarea>
+        </div>
+
+        <!--<div class="field">-->
+        <!--<label>Programming languages</label>-->
+        <!--<ul>-->
+        <!--@forms.data.Languages.all.map { language =>-->
+        <!--<li class="lang"><label>@language</label><input type="checkbox" name="languages[]" value="@language"></li>-->
+        <!--}-->
+        <!--</ul>-->
+        <!--</div>-->
+
+        <div class="field">
+            <label>Job Type</label>
+            <ul class="contracts">
+                @forms.data.ContractType.all.map { contract =>
+                <li class="radio">
+                    <input type="radio" name="contractType" value="@contract.intValue">
+                    <span>@contract.name</span>
+                </li>
+                }
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <h3>About you</h3>
+
+        <div class="field">
+            <label>Company Name</label>
+            <input type="text" placeholder="E.g Facebook"/>
+        </div>
+
+        <div class="field">
+            <label>Company Website</label>
+            <input type="text" placeholder="E.g https://pinterest.com/jobs"/>
+        </div>
+
+        <h3>Location</h3>
+
+        <div class="field">
+            <label>City</label>
+            <input type="text" placeholder="e.g New York"/>
+        </div>
+
+        <div class="field">
+            <label>Country</label>
+            <div>
+                @jobs.countries()
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <input type="submit" class="button button-medium" value="Submit"/>
+    </div>
 </div>
-
-<div class="field">
-    <label>Job Type</label>
-    <select>
-        <option>Perm</option>
-        <option>Contract</option>
-    </select>
-</div>
-
-<div class="field">
-    <label>Company Name</label>
-    <input type="text" placeholder="E.g Facebook"/>
-
-</div>
-
-<div class="field">
-    <label>Location</label>
-    <input type="text" placeholder="LA, California"/>
-
-</div>
-
-<div class="field">
-    <label>Salary (currency, min, max)</label>
-    <select>
-        <option>GBP</option>
-        <option>EU</option>
-        <option>USD</option>
-    </select>
-</div>
-
-<div class="field">
-    <label>Min Salary</label>
-    <input type="number"/>
-
-    <label>Max Salary</label>
-    <input type="number"/>
-</div>
-
-<div class="field">
-
-    <label>Technology (tags ruby, java etc)</label>
-    <input type="text" placeholder="ruby, java, sql"/>
-</div>
-
-<div class="field">
-    <label>Description (short job description</label>
-    <textarea></textarea>
-</div>
-
 }

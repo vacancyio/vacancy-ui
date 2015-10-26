@@ -2,24 +2,53 @@
 
 <div class="row">
 
-    <h1>Hiring?</h1>
+    <div class="dialog">
+        <h1>Hiring?</h1>
 
-    <div class="col-md-3 col-md-push-3">
-        <div class="pricing">
-            <a href="@controllers.routes.Jobs.standard()">
-                <h2>Create a standard job</h2>
-
-                <div class="price">FREE</div>
-            </a>
-        </div>
+        <p>Choose a plan that's right for you. Email us jobs[at]vacancy.io</p>
     </div>
 
-    <div class="col-md-3 col-md-push-3">
-        <div class="pricing">
-            <h2>Create a featured job</h2>
+    <div class="col-md-10 col-md-offset-1">
 
-            <div class="price">$99</div>
+        <div class="col-md-4">
+            <div class="pricing">
+                <a href="@controllers.routes.Jobs.standard()">
+                    <h2>Standard</h2>
+                    <ul>
+                        <li>Quick and easy</li>
+                        <li>Job published on website</li>
+                    </ul>
+                    <div class="price">$0</div>
+                </a>
+            </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="pricing">
+                <h2>Featured</h2>
+                <ul>
+                    <li>Share your job with hundreds of developers</li>
+                    <li>Get better visibility</li>
+                    <li>We feature you on our interesting jobs section</li>
+                </ul>
+                <div class="price">$250</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="pricing">
+                <a href="@controllers.routes.Jobs.standard()">
+                    <h2>Pro</h2>
+                    <ul>
+                        <li>Dedicated recruiter</li>
+                        <li>Job published on website</li>
+                    </ul>
+                    <div class="price">$1000</div>
+                </a>
+            </div>
+        </div>
+
+
     </div>
 </div>
 
