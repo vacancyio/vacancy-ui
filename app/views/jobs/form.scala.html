@@ -34,7 +34,7 @@
         <div class="field">
             <label>Job Type</label>
             <ul class="contracts">
-                @forms.data.ContractType.all.map { contract =>
+                @model.ContractType.all.map { contract =>
                 <li class="radio">
                     <input type="radio" name="contractType" value="@contract.intValue">
                     <span>@contract.name</span>
