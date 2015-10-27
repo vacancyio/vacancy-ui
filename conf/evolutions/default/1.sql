@@ -9,6 +9,7 @@ CREATE TABLE Jobs(
     description text,
     skills text,
     contract int,
+    remote boolean default false,
     company_name text,
     company_website text,
     city text,

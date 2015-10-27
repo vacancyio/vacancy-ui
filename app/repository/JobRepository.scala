@@ -15,10 +15,11 @@ object JobRepository {
       get[String]("description") ~
       get[String]("skills") ~
       get[Int]("contract") ~
+      get[Boolean]("remote") ~
       get[Option[String]]("city") ~
       get[String]("country") ~
-      get[Date]("created") map { case id ~ title ~ description ~ skills ~ contract ~ city ~ country ~ created =>
-      Job(Some(id), title, description, skills, contract, city, country, created)
+      get[Date]("created") map { case id ~ title ~ description ~ skills ~ contract ~ remote ~ city ~ country ~ created =>
+      Job(Some(id), title, description, skills, contract, remote, city, country, created)
     }
   }
 

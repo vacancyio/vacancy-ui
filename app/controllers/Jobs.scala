@@ -11,10 +11,11 @@ class Jobs extends Controller {
 
   private val jobForm = Form(
     mapping(
-      "title"   -> nonEmptyText,
+      "title" -> nonEmptyText,
       "description" -> nonEmptyText,
       "skills" -> text,
       "contract" -> number,
+      "remote" -> boolean,
       "companyName" -> optional(text),
       "companyWebsite" -> optional(text),
       "city" -> optional(text),
@@ -55,7 +56,7 @@ class Jobs extends Controller {
         println(jobPartial)
         JobRepository.insert(jobPartial) // TODO check for errors!
         Redirect(routes.Jobs.index())
-       .flashing("success" -> "Job added successfully")
+          .flashing("success" -> "Job added successfully")
       }
     )
   }

@@ -7,6 +7,7 @@ case class Job(id: Option[Long],
                description: String,
                skills: String,
                contract: Int,
+               remote: Boolean,
                city: Option[String],
                country: String,
                created: java.util.Date = new java.util.Date) {

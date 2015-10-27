@@ -27,7 +27,11 @@
             <ul class="contracts">
                 @model.ContractType.all.map { contract =>
                 <li class="radio">
-                    <input type="radio" name="contract" value="@contract.intValue">
+                    @if(contract.intValue == 1) {
+                      <input type="radio" name="contract" value="@contract.intValue" checked="checked">
+                    } else {
+                      <input type="radio" name="contract" value="@contract.intValue">
+                    }
                     <span>@contract.name</span>
                 </li>
                 }
@@ -50,6 +54,12 @@
         </div>
 
         <h3>Location</h3>
+
+        <div class="field">
+            <label>Remote?</label>
+            <p>Does this job allow remote working?</p>
+            <input type="checkbox" name="remote" />
+        </div>
 
         <div class="field">
             <label>City</label>
