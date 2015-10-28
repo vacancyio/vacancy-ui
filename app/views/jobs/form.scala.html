@@ -1,6 +1,15 @@
-@(form: Form[model.JobPartial])
+@(form: Form[model.JobPartial])(implicit messages: Messages)
 
 @helper.form(action = routes.Jobs.create) {
+
+@if(form.hasErrors) {
+<div class="alert alert-error">
+    <a class="close" data-dismiss="alert">x</a>
+    @if(form.errors.size > 0) {
+      <p>We found some errors with the form</p>
+    }
+</div>
+}
 
 <div class="row">
     <div class="col-md-6">
@@ -9,11 +18,12 @@
 
         <div class="field">
             <label>Job Title</label>
-            <input type="text" name="title" placeholder="Senior software engineer"/>
+            @helper.inputText(form("title"))
         </div>
 
         <div class="field">
             <label>Description (short job description)</label>
+            @helper.inputText(form("title"))
             <textarea name="description"></textarea>
         </div>
 

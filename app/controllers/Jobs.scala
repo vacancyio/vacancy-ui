@@ -5,7 +5,8 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
 import repository.JobRepository
-
+import play.api.Play.current
+import play.api.i18n.Messages.Implicits._
 
 class Jobs extends Controller {
 
@@ -19,7 +20,7 @@ class Jobs extends Controller {
       "companyName" -> optional(text),
       "companyWebsite" -> optional(text),
       "city" -> optional(text),
-      "country" -> text
+      "country" -> text(minLength = 2)
     )(JobPartial.apply)(JobPartial.unapply)
   )
 
