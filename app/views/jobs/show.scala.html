@@ -1,11 +1,15 @@
-@(id: String)
+@(job: model.Job)
 
 @page("Job listing") {
 
-<h2>Senior Software Engineer</h2>
+<h2>@job.title</h2>
 
-<p>Posted 2 days ago</p>
+<p>@job.created</p>
 
-<p>Square Up are looking for talented ruby and java developers to work on interesting stuff.</p>
+<p>@job.employerInformation.map(_.name)</p>
+
+<div class="description">
+    @job.description
+</div>
 
 }

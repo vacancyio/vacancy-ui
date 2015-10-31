@@ -1,6 +1,7 @@
 package model
 
 import play.api.libs.json._
+import repository.EmployerRepository
 
 case class Job(id: Option[Long],
                title: String,
@@ -15,14 +16,17 @@ case class Job(id: Option[Long],
 
   /**
    * Pretty print for displaying the job location
-   *
    */
   def location(): String = {
     this.city map { _ ++ ", " ++ this.country } getOrElse this.country
   }
+
+  def employerInformation: Option[Employer] =
+    this.id flatMap { id => EmployerRepository.findOneById(id) }
 }
 
 object Job {
+
   implicit val format = Json.format[Job]
 }
 

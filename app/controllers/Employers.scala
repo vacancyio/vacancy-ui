@@ -23,8 +23,10 @@ class Employers extends Controller {
     Ok(views.html.employers.index(employers))
   }
 
-  def show(name: String) = Action {
-    NotImplemented
+  def show(id: Long) = Action {
+    EmployerRepository.findOneById(id) map { employer =>
+      Ok(views.html.employers.show(employer))
+    } getOrElse NotFound
   }
 
   def register = Action { implicit request =>

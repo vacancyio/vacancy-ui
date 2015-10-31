@@ -25,6 +25,10 @@ object EmployerRepository {
       .on('limit -> limit).as(rowParser.*)
   }
 
+  def findOneById(id: Long): Option[Employer] = DB.withConnection { implicit c =>
+    SQL("SELECT * from employers WHERE id = {id}").on('id -> id).as(rowParser.singleOpt)
+  }
+
   def findOneByEmail(email: String): Option[Employer] = DB.withConnection { implicit c =>
     SQL("SELECT * from employers WHERE email = {email}").on('email -> email).as(rowParser.singleOpt)
   }

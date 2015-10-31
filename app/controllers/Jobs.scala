@@ -28,8 +28,10 @@ class Jobs extends Controller with SecuredAction {
     Ok(views.html.jobs.index(jobs))
   }
 
-  def show(id: String) = Action {
-    Ok(views.html.jobs.show(id))
+  def show(id: Long) = Action {
+    JobRepository.findOneById(id) map { job =>
+      Ok(views.html.jobs.show(job))
+    } getOrElse NotFound
   }
 
   def selection = Action {

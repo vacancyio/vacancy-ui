@@ -20,16 +20,16 @@ object JobRepository {
       get[String]("country") ~
       get[Long]("employer_id") ~
       get[Date]("created") map { case id ~ title ~ description ~ skills ~ contract ~ remote ~ city ~ country ~ employer ~ created =>
-      Job(Some(id), title, description, skills, contract, remote, city, country, employer, created)
+        Job(Some(id), title, description, skills, contract, remote, city, country, employer, created)
     }
   }
 
-  /**
-   * Return all incidents from the database
-   */
   def all(limit: Int = 100): Seq[Job] = DB.withConnection { implicit c =>
-    SQL("SELECT * FROM jobs ORDER BY id DESC LIMIT {limit}")
-      .on('limit -> limit).as(rowParser.*)
+    SQL("SELECT * FROM jobs ORDER BY id DESC LIMIT {limit}").on('limit -> limit).as(rowParser.*)
+  }
+
+  def findOneById(id: Long): Option[Job] = DB.withConnection { implicit c =>
+    SQL("SELECT * from jobs WHERE id = {id}").on('id -> id).as(rowParser.singleOpt)
   }
 
   def insert(employer: Employer, partial: JobPartial): Option[Long] = DB.withConnection { implicit c =>
