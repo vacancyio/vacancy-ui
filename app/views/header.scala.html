@@ -1,13 +1,20 @@
+@()(implicit request: play.api.mvc.RequestHeader)
 <header id="header">
     <div class="container">
         <h1><a href="/">VACANCY</a></h1>
         <ul>
-            <li><a href="@routes.Static.index()">Home</a></li>
+            @if(request.session.isEmpty) {
+              <li><a href="@routes.Static.index()">Home</a></li>
+            } else {
+              <li><a href="@routes.Dashboard.employers">Dashboard</a></li>
+            }
             <li><a href="@routes.Jobs.index()">Jobs</a></li>
-            <li><a href="@routes.Employers.index()">Employers</a></li>
             <li><a href="@routes.Jobs.standard()">Post a job</a></li>
-            <li><a href="@routes.EmployerAuthentication.login()">Login</a></li>
-            <li><a href="@routes.EmployerAuthentication.logout()">Log out</a></li>
+            @if(request.session.isEmpty) {
+              <li><a href="@routes.EmployerAuthentication.login()">Login</a></li>
+            } else {
+              <li><a href="@routes.EmployerAuthentication.logout()">Log out</a></li>
+            }
         </ul>
     </div>
 </header>

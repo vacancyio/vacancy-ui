@@ -1,7 +1,24 @@
-@(employer: model.Employer)
+@(employer: model.Employer, jobs: List[model.Job])(implicit request: play.api.mvc.RequestHeader)
+
+@import helpers.Format
 
 @page("Your dashboard") {
 
-  <h1>@employer.name Dashboard</h1>
+    <h1>@employer.name Dashboard</h1>
 
+    <h2>Our Jobs</h2>
+
+    <table class="table striped">
+        <tr>
+            <th>Job Title</th>
+            <th>Posted On</th>
+            <th>Edit</th>
+        </tr>
+        @jobs.map { job =>
+          <tr>
+              <td><a href="@routes.Jobs.edit(job.id.get)">@job.title</a></td>
+              <td>@Format.humanDate(job.created)</td>
+          </tr>
+        }
+    </table>
 }

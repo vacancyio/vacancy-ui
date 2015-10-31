@@ -1,4 +1,4 @@
-@(form: Form[model.JobPartial])(implicit messages: Messages)
+@(form: Form[model.JobPartial])(implicit messages: Messages, request: play.api.mvc.RequestHeader)
 
 @helper.form(action = routes.Jobs.create) {
 
@@ -50,7 +50,6 @@
     <div class="col-md-6">
 
         <h3>Location</h3>
-
         <div class="field">
             <p>Does this job allow remote working?</p>
             @helper.checkbox(form("remote"), 'label -> "Allow remote work")

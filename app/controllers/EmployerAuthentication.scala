@@ -13,7 +13,7 @@ class EmployerAuthentication extends Controller {
     mapping(
       "email"    -> email,
       "password" -> nonEmptyText
-    )(EmployerLoginData.apply)(EmployerLoginData.unapply))
+    )(LoginData.apply)(LoginData.unapply))
 
   def login = Action { implicit request =>
     Ok(views.html.employers.login(loginForm))

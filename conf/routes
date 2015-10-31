@@ -1,25 +1,30 @@
 # Jobs
 # =====================================================
 
-GET /                     controllers.Static.index
+GET /                        controllers.Static.index
 
-GET  /employers/login     controllers.EmployerAuthentication.login
-GET  /employers/logout    controllers.EmployerAuthentication.logout
-POST /employers/login     controllers.EmployerAuthentication.authenticate
+GET     /employers/login     controllers.EmployerAuthentication.login
+GET     /employers/logout    controllers.EmployerAuthentication.logout
+POST    /employers/login     controllers.EmployerAuthentication.authenticate
 
-GET  /employers           controllers.Employers.index
-GET  /employers/register  controllers.Employers.register
-GET  /employers/:id       controllers.Employers.show(id: Long)
-POST /employers           controllers.Employers.create
+GET     /employers           controllers.Employers.index
+GET     /employers/register  controllers.Employers.register
+GET     /employers/:id       controllers.Employers.show(id: Long)
+POST    /employers           controllers.Employers.create
 
-GET     /jobs             controllers.Jobs.index
-POST    /jobs             controllers.Jobs.create
+GET     /dashboard           controllers.Dashboard.employers
 
-GET     /jobs/new         controllers.Jobs.selection
-GET     /jobs/standard    controllers.Jobs.standard
-GET     /jobs/promoted    controllers.Jobs.promoted
+GET     /jobs                controllers.Jobs.index
+POST    /jobs                controllers.Jobs.create
 
-GET     /jobs/:id         controllers.Jobs.show(id: Long)
+GET     /jobs/new            controllers.Jobs.selection
+GET     /jobs/standard       controllers.Jobs.standard
+GET     /jobs/promoted       controllers.Jobs.promoted
+
+GET     /jobs/:id            controllers.Jobs.show(id: Long)
+GET     /jobs/:id/edit       controllers.Jobs.edit(id: Long)
+
+PUT    /jobs/:id             controllers.Jobs.update(id: Long)
 
 ## API
 # =====================================================

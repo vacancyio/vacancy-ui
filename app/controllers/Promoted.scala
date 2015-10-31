@@ -6,7 +6,7 @@ import play.api.mvc._
 
 class Promoted extends Controller {
 
-  def index() = Action {
+  def index() = Action { implicit request =>
     Ok(views.html.promoted.index())
   }
 }

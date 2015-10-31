@@ -1,15 +1,30 @@
-@(job: model.Job)
+@(job: model.Job)(implicit request: play.api.mvc.RequestHeader)
+
+@import helpers.Format
 
 @page("Job listing") {
 
-<h2>@job.title</h2>
+    <h2>
+        @job.employerInformation.map(_.name) is hiring a @job.title
+    </h2>
 
-<p>@job.created</p>
+    <p>Contract Type: @job.contractName</p>
+    <p>Posted: @Format.humanDate(job.created)</p>
 
-<p>@job.employerInformation.map(_.name)</p>
+    @if(job.remote) {
+        <p>Remote: Yes</p>
+    } else {
+        <p>Remote: No</p>
+    }
 
-<div class="description">
-    @job.description
-</div>
+    <div class="description">
+        <h3>Description</h3>
+        @Html(Format.formatInput(job.description))
+    </div>
+
+    <div class="skills">
+        <h3>Skills</h3>
+        @Html(Format.formatInput(job.skills))
+    </div>
 
 }

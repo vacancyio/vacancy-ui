@@ -24,12 +24,18 @@ object JobRepository {
     }
   }
 
-  def all(limit: Int = 100): Seq[Job] = DB.withConnection { implicit c =>
+  def all(limit: Int = 100): List[Job] = DB.withConnection { implicit c =>
     SQL("SELECT * FROM jobs ORDER BY id DESC LIMIT {limit}").on('limit -> limit).as(rowParser.*)
   }
 
   def findOneById(id: Long): Option[Job] = DB.withConnection { implicit c =>
-    SQL("SELECT * from jobs WHERE id = {id}").on('id -> id).as(rowParser.singleOpt)
+    SQL("SELECT * FROM jobs WHERE id = {id}").on('id -> id).as(rowParser.singleOpt)
+  }
+
+  def findOneByIdForEmployer(employer: Long, id: Long): Option[Job] = DB.withConnection { implicit c =>
+    SQL("SELECT * FROM jobs WHERE id={id} AND employer_id = {employer}")
+      .on('id -> id, 'employer -> employer)
+      .as(rowParser.singleOpt)
   }
 
   def insert(employer: Employer, partial: JobPartial): Option[Long] = DB.withConnection { implicit c =>
@@ -38,7 +44,7 @@ object JobRepository {
       val values = "({title}, {description}, {skills}, {contract}, {city}, {country}, {employer}, {created})"
       SQL(s"INSERT INTO jobs $fields VALUES $values")
         .on(
-          'title -> partial.title,
+          'title -> partial.title.capitalize,
           'description -> partial.description,
           'skills -> partial.skills,
           'contract -> partial.contract,
@@ -48,5 +54,9 @@ object JobRepository {
           'created -> new Date
         ).executeInsert()
     }
+  }
+
+  def forEmployer(id: Long): List[Job] = DB.withConnection { implicit c =>
+    SQL("SELECT * FROM jobs WHERE employer_id = {id}").on('id -> id).as(rowParser.*)
   }
 }

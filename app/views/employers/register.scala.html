@@ -1,4 +1,4 @@
-@(form: Form[model.EmployerPartial])(implicit messages: Messages)
+@(form: Form[model.EmployerPartial])(implicit messages: Messages, request: play.api.mvc.RequestHeader)
 
 @page("Register your company") {
 
@@ -7,7 +7,7 @@
     <div class="col-md-8">
 
         <header class="push">
-            <h1>Register</h1>
+            <h1>Employer Registration</h1>
             <p>Register an account and start connecting with talented developers instantly</p>
         </header>
 

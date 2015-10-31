@@ -18,12 +18,12 @@ class Employers extends Controller {
     )(EmployerPartial.apply)(EmployerPartial.unapply)
   )
 
-  def index = Action {
+  def index = Action { implicit request =>
     val employers = EmployerRepository.all()
     Ok(views.html.employers.index(employers))
   }
 
-  def show(id: Long) = Action {
+  def show(id: Long) = Action { implicit request =>
     EmployerRepository.findOneById(id) map { employer =>
       Ok(views.html.employers.show(employer))
     } getOrElse NotFound

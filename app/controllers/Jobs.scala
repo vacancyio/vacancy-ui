@@ -1,6 +1,6 @@
 package controllers
 
-import model.JobPartial
+import model.{Job, JobPartial}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
@@ -23,18 +23,29 @@ class Jobs extends Controller with SecuredAction {
     )(JobPartial.apply)(JobPartial.unapply)
   )
 
-  def index = Action {
+  def index = Action { implicit request =>
     val jobs = JobRepository.all()
     Ok(views.html.jobs.index(jobs))
   }
 
-  def show(id: Long) = Action {
+  def show(id: Long) = Action { implicit request =>
     JobRepository.findOneById(id) map { job =>
       Ok(views.html.jobs.show(job))
     } getOrElse NotFound
   }
 
-  def selection = Action {
+  def edit(id: Long) = withEmployer { employer => { implicit request =>
+    val job = employer.id flatMap { employerID => JobRepository.findOneByIdForEmployer(employerID, id) }
+    job map { j =>
+      Ok(views.html.jobs.edit(j, jobForm))
+    } getOrElse NotFound
+  }}
+
+  def update(id: Long) = withEmployer { employer => { implicit request =>
+    NotImplemented
+  }}
+
+  def selection = Action { implicit request =>
     Ok(views.html.jobs.selection())
   }
 

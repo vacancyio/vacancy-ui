@@ -1,27 +1,26 @@
-@(form: Form[model.EmployerLoginData])(implicit messages: Messages)
+@(form: Form[model.LoginData])(implicit messages: Messages, request: play.api.mvc.RequestHeader)
 
 @page("Employer login") {
 
 <div class="row">
-<div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3 login">
 
-    <h1>Login</h1>
+        <h2>Login</h2>
 
-    @helper.form(action = routes.EmployerAuthentication.authenticate) {
-        <div class="field">
-            @helper.inputText(form("email"), '_label -> "Email")
-        </div>
-        <div class="field">
-            @helper.inputText(form("password"), '_label -> "Password")
-        </div>
-        <div class="push">
-            <input type="submit" class="button button-medium" value="Login"/>
-        </div>
-    }
+        @helper.form(action = routes.EmployerAuthentication.authenticate) {
+            <div class="field">
+                @helper.inputText(form("email"), '_label -> "Email")
+            </div>
+            <div class="field">
+                @helper.inputText(form("password"), '_label -> "Password")
+            </div>
+            <div class="push">
+                <input type="submit" class="button button-medium" value="Login"/>
+            </div>
+        }
 
-    <p>Or <a href="@routes.Employers.register()">Sign Up</a></p>
-
-</div>
+        <p>Or <a href="@routes.Employers.register()">Sign Up</a></p>
+    </div>
 </div>
 
 }
