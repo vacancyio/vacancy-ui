@@ -6,30 +6,27 @@
 <div class="alert alert-error">
     <a class="close" data-dismiss="alert">x</a>
     @if(form.errors.size > 0) {
-      <p>We found some errors with the form</p>
+      <p>We found @form.errors.size errors with the form</p>
     }
 </div>
 }
 
 <div class="row">
+
     <div class="col-md-6">
 
         <h3>About the role</h3>
 
         <div class="field">
-            <label>Job Title</label>
-            @helper.inputText(form("title"))
+            @helper.inputText(form("title"), '_label -> "Job title")
         </div>
 
         <div class="field">
-            <label>Description (short job description)</label>
-            @helper.inputText(form("title"))
-            <textarea name="description"></textarea>
+            @helper.textarea(form("description"), '_label -> "Job description")
         </div>
 
         <div class="field">
-            <label>Skills and requirements</label>
-            <textarea name="skills"></textarea>
+            @helper.textarea(form("skills"), '_label -> "Skills and requirements")
         </div>
 
         <div class="field">
@@ -54,26 +51,23 @@
         <h3>About you</h3>
 
         <div class="field">
-            <label>Company Name</label>
-            <input type="text" name="companyName" placeholder="E.g Facebook"/>
+            @helper.inputText(form("companyName"), '_label -> "Company Name")
         </div>
 
         <div class="field">
-            <label>Company Website</label>
-            <input type="text" name="companyWebsite" placeholder="E.g https://pinterest.com/jobs"/>
+            @helper.inputText(form("companyWebsite"), '_label -> "Company Website")
         </div>
 
         <h3>Location</h3>
 
         <div class="field">
-            <label>Remote?</label>
             <p>Does this job allow remote working?</p>
-            <input type="checkbox" name="remote" />
+            @helper.checkbox(form("remote"), 'label -> "Allow remote work")
         </div>
 
         <div class="field">
             <label>City</label>
-            <input type="text" name="city" placeholder="e.g New York"/>
+            <input type="text" id="city" name="city" placeholder="e.g New York"/>
         </div>
 
         <div class="field">
@@ -84,7 +78,7 @@
         </div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12 push">
         <input type="submit" class="button button-medium" value="Submit"/>
     </div>
 </div>

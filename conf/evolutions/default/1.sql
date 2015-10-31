@@ -2,6 +2,15 @@
 
 # --- !Ups
 
+CREATE SEQUENCE employer_id_seq;
+CREATE TABLE Employers(
+    id bigint NOT NULL UNIQUE DEFAULT nextval('employer_id_seq'),
+    name text NOT NULL UNIQUE,
+    email text NOT NULL UNIQUE,
+    password text NOT NULL,
+    created TIMESTAMP WITH TIME ZONE NOT NULL
+);
+
 CREATE SEQUENCE job_id_seq;
 CREATE TABLE Jobs(
     id bigint NOT NULL DEFAULT nextval('job_id_seq'),
@@ -14,7 +23,9 @@ CREATE TABLE Jobs(
     company_website text,
     city text,
     country char(2) NOT NULL,
+    employer_id bigint NOT NULL,
     created TIMESTAMP WITH TIME ZONE NOT NULL,
+    FOREIGN KEY (employer_id) REFERENCES Employers(id),
     PRIMARY KEY (id)
 );
 
@@ -22,3 +33,6 @@ CREATE TABLE Jobs(
 
 DROP TABLE Jobs;
 DROP SEQUENCE job_id_seq;
+
+DROP TABLE Employers;
+DROP SEQUENCE employer_id_seq;

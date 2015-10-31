@@ -1,0 +1,32 @@
+@(form: Form[model.EmployerPartial])(implicit messages: Messages)
+
+@page("Register your company") {
+
+<div class="row">
+
+    <div class="col-md-8">
+
+        <header class="push">
+            <h1>Register</h1>
+            <p>Register an account and start connecting with talented developers instantly</p>
+        </header>
+
+        @helper.form(action = routes.Employers.create) {
+        <div class="field">
+            @helper.inputText(form("name"), '_label -> "Company Name")
+        </div>
+        <div class="field">
+            @helper.inputText(form("email"), '_label -> "Email")
+        </div>
+        <div class="field">
+            @helper.inputText(form("password"), '_label -> "Password")
+        </div>
+        <div class="push">
+            <input type="submit" class="button button-medium" value="Get started"/>
+        </div>
+        }
+    </div>
+
+</div>
+
+}

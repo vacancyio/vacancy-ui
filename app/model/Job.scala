@@ -10,6 +10,7 @@ case class Job(id: Option[Long],
                remote: Boolean,
                city: Option[String],
                country: String,
+               employer: Long,
                created: java.util.Date = new java.util.Date) {
 
   /**

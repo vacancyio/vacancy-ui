@@ -18,8 +18,9 @@ object JobRepository {
       get[Boolean]("remote") ~
       get[Option[String]]("city") ~
       get[String]("country") ~
-      get[Date]("created") map { case id ~ title ~ description ~ skills ~ contract ~ remote ~ city ~ country ~ created =>
-      Job(Some(id), title, description, skills, contract, remote, city, country, created)
+      get[Long]("employer") ~
+      get[Date]("created") map { case id ~ title ~ description ~ skills ~ contract ~ remote ~ city ~ country ~ employer ~ created =>
+      Job(Some(id), title, description, skills, contract, remote, city, country, employer, created)
     }
   }
 

@@ -1,11 +1,11 @@
 body {
-  background: #fafafa;
+  background: #f5f7fa;
   font-size: 16px;
   font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  color: #777;
+  color: #869096;
 }
 
-h1, h2, h3, h4, h5 { color: #444; font-weight: 600; }
+h1, h2, h3, h4, h5 { color: @dark; font-weight: 600; }
 
 img { max-width: 100%; }
 
@@ -14,6 +14,10 @@ p { font-size: 18px; }
 ul { list-style: none; padding: 0; margin: 0; }
 
 a, a:hover { color: @brand; text-decoration: none; }
+
+form .info { display: none; }
+
+label { text-transform: capitalize; }
 
 .button {
   padding: 12px 24px;
@@ -40,7 +44,11 @@ a, a:hover { color: @brand; text-decoration: none; }
 input, textarea { padding: 12px; width: 100%; border: 2px solid #eee; }
 
 .field {
-  padding: 0 0 24px 0;
+  padding: 6px 0;
+}
+
+.push {
+  padding: 24px 0;
 }
 
 textarea { min-height: 150px; }

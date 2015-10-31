@@ -42,19 +42,17 @@ class Jobs extends Controller {
   }
 
   def promoted = Action {
-    Ok(views.html.jobs.promoted())
+    NotImplemented
   }
 
   def create = Action { implicit request =>
     println(request.body)
     jobForm.bindFromRequest.fold(
       formWithErrors => {
-        println(formWithErrors)
         Ok(views.html.jobs.standard(formWithErrors))
           .flashing("error" -> "Form contains errors")
       },
       jobPartial => {
-        println(jobPartial)
         JobRepository.insert(jobPartial) // TODO check for errors!
         Redirect(routes.Jobs.index())
           .flashing("success" -> "Job added successfully")
