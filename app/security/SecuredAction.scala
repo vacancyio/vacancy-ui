@@ -11,7 +11,7 @@ trait SecuredAction {
     request.session.get("email")
 
   def onUnauthorized(request: RequestHeader): Result =
-    Results.Redirect(routes.EmployerAuthenticationController.login())
+    Results.Redirect(routes.EmployerAuthentication.login())
 
   def withAuth(f: => String => Request[AnyContent] => Result): EssentialAction = {
     Security.Authenticated(email, onUnauthorized) { user =>

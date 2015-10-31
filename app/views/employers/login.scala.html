@@ -7,7 +7,7 @@
 
     <h1>Login</h1>
 
-    @helper.form(action = routes.EmployerAuthenticationController.authenticate) {
+    @helper.form(action = routes.EmployerAuthentication.authenticate) {
         <div class="field">
             @helper.inputText(form("email"), '_label -> "Email")
         </div>

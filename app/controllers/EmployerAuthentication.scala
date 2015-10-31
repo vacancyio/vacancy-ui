@@ -7,7 +7,7 @@ import play.api.data.Forms._
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
 
-class EmployerAuthenticationController extends Controller {
+class EmployerAuthentication extends Controller {
 
   private val loginForm = Form(
     mapping(
@@ -32,7 +32,7 @@ class EmployerAuthenticationController extends Controller {
   }
 
   def logout = Action {
-    Redirect(routes.EmployerAuthenticationController.login()).withNewSession.flashing(
+    Redirect(routes.EmployerAuthentication.login()).withNewSession.flashing(
       "success" -> "You have been successfully logged out"
     )
   }
