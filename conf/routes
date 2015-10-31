@@ -21,6 +21,12 @@ GET     /jobs/promoted    controllers.Jobs.promoted
 
 GET     /jobs/:id         controllers.Jobs.show(id: Long)
 
+## API
+# =====================================================
+
+GET /api/v1/jobs              controllers.api.Jobs.index
+GET /api/v1/jobs/:id          controllers.api.Jobs.show(id: Long)
+
 # Promoted
 # =====================================================
 GET    /promoted         controllers.Promoted.index
