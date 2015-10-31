@@ -6,6 +6,7 @@ import anorm._
 import anorm.SqlParser._
 import model._
 import play.api.db.DB
+import security.Encrypt
 
 object EmployerRepository {
 
@@ -20,16 +21,20 @@ object EmployerRepository {
   }
 
   def all(limit: Int = 100): List[Employer] = DB.withConnection { implicit c =>
-    SQL(s"SELECT * FROM employers ORDER BY id DESC LIMIT {limit}")
+    SQL("SELECT * FROM employers ORDER BY id DESC LIMIT {limit}")
       .on('limit -> limit).as(rowParser.*)
   }
 
+  def findOneByEmail(email: String): Option[Employer] = DB.withConnection { implicit c =>
+    SQL("SELECT * from employers WHERE email = {email}").on('email -> email).as(rowParser.singleOpt)
+  }
+
   def insert(partial: EmployerPartial): Option[Long] = DB.withConnection { implicit c =>
-    SQL(s"INSERT INTO employers (name, email, password, created) VALUES ({name}, {email}, {password}, {created})")
+    SQL("INSERT INTO employers (name, email, password, created) VALUES ({name}, {email}, {password}, {created})")
       .on(
         'name -> partial.name,
         'email -> partial.email,
-        'password -> partial.password,
+        'password -> Encrypt.encryptPassword(partial.password),
         'created -> new Date
       ).executeInsert()
   }

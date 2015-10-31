@@ -19,8 +19,6 @@ CREATE TABLE Jobs(
     skills text,
     contract int,
     remote boolean default false,
-    company_name text,
-    company_website text,
     city text,
     country char(2) NOT NULL,
     employer_id bigint NOT NULL,

@@ -7,6 +7,9 @@ GET  /employers           controllers.Employers.index
 GET  /employers/register  controllers.Employers.register
 POST /employers           controllers.Employers.create
 
+GET /employers/login      controllers.EmployerAuthenticationController.login
+POST /employers/login     controllers.EmployerAuthenticationController.authenticate
+
 GET     /jobs             controllers.Jobs.index
 POST    /jobs             controllers.Jobs.create
 

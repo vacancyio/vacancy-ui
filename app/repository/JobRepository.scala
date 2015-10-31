@@ -18,7 +18,7 @@ object JobRepository {
       get[Boolean]("remote") ~
       get[Option[String]]("city") ~
       get[String]("country") ~
-      get[Long]("employer") ~
+      get[Long]("employer_id") ~
       get[Date]("created") map { case id ~ title ~ description ~ skills ~ contract ~ remote ~ city ~ country ~ employer ~ created =>
       Job(Some(id), title, description, skills, contract, remote, city, country, employer, created)
     }
@@ -28,20 +28,25 @@ object JobRepository {
    * Return all incidents from the database
    */
   def all(limit: Int = 100): Seq[Job] = DB.withConnection { implicit c =>
-    SQL(s"SELECT * FROM jobs ORDER BY id DESC LIMIT {limit}")
+    SQL("SELECT * FROM jobs ORDER BY id DESC LIMIT {limit}")
       .on('limit -> limit).as(rowParser.*)
   }
 
-  def insert(partial: JobPartial): Option[Long] = DB.withConnection { implicit c =>
-    SQL(s"INSERT INTO jobs (title, description, skills, contract, city, country, created) VALUES ({title}, {description}, {skills}, {contract}, {city}, {country}, {created})")
-      .on(
-        'title -> partial.title,
-        'description -> partial.description,
-        'skills -> partial.skills,
-        'contract -> partial.contract,
-        'city -> partial.city,
-        'country -> partial.country,
-        'created -> new Date
-      ).executeInsert()
+  def insert(employer: Employer, partial: JobPartial): Option[Long] = DB.withConnection { implicit c =>
+    employer.id flatMap { id =>
+      val fields = "(title, description, skills, contract, city, country, employer_id, created)"
+      val values = "({title}, {description}, {skills}, {contract}, {city}, {country}, {employer}, {created})"
+      SQL(s"INSERT INTO jobs $fields VALUES $values")
+        .on(
+          'title -> partial.title,
+          'description -> partial.description,
+          'skills -> partial.skills,
+          'contract -> partial.contract,
+          'city -> partial.city,
+          'country -> partial.country,
+          'employer -> id,
+          'created -> new Date
+        ).executeInsert()
+    }
   }
 }

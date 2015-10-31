@@ -2,9 +2,11 @@
 
 @page("Employers") {
 
-
-  @employers.map { employer =>
-
-    @employer.name
+  @if(employers.length == 0) {
+    <p>No employers found in the system</p>
+  } else {
+    @employers.map { employer =>
+        @employer.name
+    }
   }
 }

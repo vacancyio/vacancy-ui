@@ -37,8 +37,12 @@ class Employers extends Controller {
         Ok(views.html.employers.register(formWithErrors)).flashing("error" -> "Form contains errors")
       },
       employerData => {
-        Ok
-      }
+        val record = EmployerRepository.insert(employerData)
+        if (record.isDefined)
+          Redirect(routes.Employers.index())
+        else
+          Redirect(routes.Employers.index())
+        }
     )
   }
 }

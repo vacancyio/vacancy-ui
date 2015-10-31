@@ -7,8 +7,9 @@ import play.api.mvc._
 import repository.JobRepository
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
+import security.SecuredAction
 
-class Jobs extends Controller {
+class Jobs extends Controller with SecuredAction {
 
   private val jobForm = Form(
     mapping(
@@ -17,8 +18,6 @@ class Jobs extends Controller {
       "skills" -> text,
       "contract" -> number,
       "remote" -> boolean,
-      "companyName" -> optional(text),
-      "companyWebsite" -> optional(text),
       "city" -> optional(text),
       "country" -> text(minLength = 2)
     )(JobPartial.apply)(JobPartial.unapply)
@@ -37,26 +36,23 @@ class Jobs extends Controller {
     Ok(views.html.jobs.selection())
   }
 
-  def standard = Action {
+  def promoted = Action { NotImplemented }
+
+  def standard = withEmployer { employer => { implicit request =>
     Ok(views.html.jobs.standard(jobForm))
-  }
+  }}
 
-  def promoted = Action {
-    NotImplemented
-  }
-
-  def create = Action { implicit request =>
-    println(request.body)
+  def create = withEmployer { employer => { implicit request =>
     jobForm.bindFromRequest.fold(
       formWithErrors => {
         Ok(views.html.jobs.standard(formWithErrors))
           .flashing("error" -> "Form contains errors")
       },
       jobPartial => {
-        JobRepository.insert(jobPartial) // TODO check for errors!
+        JobRepository.insert(employer, jobPartial) // TODO check for errors!
         Redirect(routes.Jobs.index())
           .flashing("success" -> "Job added successfully")
       }
     )
-  }
+  }}
 }

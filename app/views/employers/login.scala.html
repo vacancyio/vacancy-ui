@@ -1,0 +1,25 @@
+@(form: Form[model.EmployerLoginData])(implicit messages: Messages)
+
+@page("Employer login") {
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+
+    <h1>Login</h1>
+
+    @helper.form(action = routes.EmployerAuthenticationController.authenticate) {
+        <div class="field">
+            @helper.inputText(form("email"), '_label -> "Email")
+        </div>
+        <div class="field">
+            @helper.inputText(form("password"), '_label -> "Password")
+        </div>
+        <div class="push">
+            <input type="submit" class="button button-medium" value="Login"/>
+        </div>
+    }
+
+</div>
+</div>
+
+}

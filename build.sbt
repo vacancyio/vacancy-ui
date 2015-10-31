@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   ws,
   evolutions,
   "com.typesafe.play" %% "anorm"      % "2.4.0",
+  "org.mindrot"        % "jbcrypt"    % "0.3m",
   "joda-time"          % "joda-time"  % "2.7",
   "org.postgresql"     % "postgresql" % "9.4-1204-jdbc42",
   specs2 % Test
