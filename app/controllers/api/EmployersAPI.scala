@@ -2,7 +2,7 @@ package controllers.api
 
 import play.api.mvc._
 
-class Employers extends Controller {
+class EmployersApi extends Controller {
 
   def index = Action { NotImplemented }
 

@@ -4,7 +4,7 @@ import play.api.mvc._
 import repository.JobRepository
 import play.api.libs.json._
 
-class Jobs extends Controller {
+class JobsApi extends Controller {
 
   def index = Action {
     val jobs = JobRepository.all()
