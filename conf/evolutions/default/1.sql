@@ -14,8 +14,9 @@ CREATE SEQUENCE job_id_seq;
 CREATE TABLE Jobs(
     id bigint NOT NULL UNIQUE DEFAULT nextval('job_id_seq'),
     title text NOT NULL,
-    description text,
+    description text NOT NULL,
     skills text,
+    application text,
     contract int,
     remote boolean default false,
     city text,

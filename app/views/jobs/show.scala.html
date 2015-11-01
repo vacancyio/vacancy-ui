@@ -24,7 +24,9 @@
 
     <div class="skills">
         <h3>Skills</h3>
-        @Html(Format.formatInput(job.skills))
+        @job.skills.map { skills =>
+          @Html(Format.formatInput(skills))
+        }
     </div>
 
 }

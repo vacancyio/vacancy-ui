@@ -1,25 +1,12 @@
 @(employer: model.Employer, jobs: List[model.Job])(implicit request: play.api.mvc.RequestHeader)
 
-@import helpers.Format
-
 @page("Your dashboard") {
 
     <h1>@employer.name Dashboard</h1>
 
-    <h2>Your Jobs</h2>
-
-    <table class="table striped">
-        <tr>
-            <th>Job Title</th>
-            <th>Posted On</th>
-            <th>Views</th>
-        </tr>
-        @jobs.map { job =>
-          <tr>
-              <td><a href="@routes.Jobs.edit(job.id.get)">@job.title</a></td>
-              <td>@Format.humanDate(job.created)</td>
-              <td>2342</td>
-          </tr>
-        }
-    </table>
+    @if(jobs.isEmpty) {
+      <p>You haven't posted any jobs yet. Let's <a href="@routes.Jobs.standard()">create one</a></p>
+    } else {
+        @employers.dashboards.jobs(jobs)
+    }
 }

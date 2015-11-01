@@ -26,11 +26,21 @@ GET     /jobs/:id/edit       controllers.Jobs.edit(id: Long)
 
 POST    /jobs/:id             controllers.Jobs.update(id: Long)
 
+## Users
+
+GET /users/:username          controllers.Users.show(username: String)
+
 ## API
 # =====================================================
 
-GET /api/v1/jobs              controllers.api.JobsApi.index
-GET /api/v1/jobs/:id          controllers.api.JobsApi.show(id: Long)
+GET /api/v1/jobs              controllers.api.Jobs.index
+GET /api/v1/jobs/:id          controllers.api.Jobs.show(id: Long)
+
+POST /api/v1/jobs             controllers.api.Jobs.create
+
+PUT /api/v1/jobs/:id          controllers.api.Jobs.update(id: Long)
+
+DELETE /api/v1/jobs/:id       controllers.api.Jobs.delete(id: Long)
 
 # Promoted
 # =====================================================

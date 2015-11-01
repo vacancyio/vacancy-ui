@@ -9,7 +9,7 @@ class Users extends Controller {
   }
 
   def show(username: String) = Action { implicit request =>
-    NotImplemented
+    Ok(views.html.users.show())
   }
 
   def create = Action { implicit request =>

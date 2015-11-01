@@ -5,9 +5,9 @@ import repository.EmployerRepository
 import model._
 import play.api.mvc._
 
-trait SecuredAction {
+trait EmployerSecuredAction {
 
-  def email(request: RequestHeader): Option[String] =
+  private def email(request: RequestHeader): Option[String] =
     request.session.get("email")
 
   def onUnauthorized(request: RequestHeader): Result =

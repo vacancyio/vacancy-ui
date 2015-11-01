@@ -13,14 +13,15 @@ object JobRepository {
     get[Long]("id") ~
       get[String]("title") ~
       get[String]("description") ~
-      get[String]("skills") ~
+      get[Option[String]]("skills") ~
+      get[Option[String]]("application") ~
       get[Int]("contract") ~
       get[Boolean]("remote") ~
       get[Option[String]]("city") ~
       get[String]("country") ~
       get[Long]("employer_id") ~
-      get[Date]("created") map { case id ~ title ~ description ~ skills ~ contract ~ remote ~ city ~ country ~ employer ~ created =>
-        Job(Some(id), title, description, skills, contract, remote, city, country, employer, created)
+      get[Date]("created") map { case id ~ title ~ description ~ skills ~ apply ~ contract ~ remote ~ city ~ country ~ employer ~ created =>
+        Job(Some(id), title, description, skills, apply, contract, remote, city, country, employer, created)
     }
   }
 
@@ -40,13 +41,14 @@ object JobRepository {
 
   def insert(employer: Employer, partial: JobPartial): Option[Long] = DB.withConnection { implicit c =>
     employer.id flatMap { id =>
-      val fields = "(title, description, skills, contract, city, country, employer_id, created)"
-      val values = "({title}, {description}, {skills}, {contract}, {city}, {country}, {employer}, {created})"
+      val fields = "(title, description, skills, application, contract, city, country, employer_id, created)"
+      val values = "({title}, {description}, {skills}, {application}, {contract}, {city}, {country}, {employer}, {created})"
       SQL(s"INSERT INTO jobs $fields VALUES $values")
         .on(
           'title -> partial.title.capitalize,
           'description -> partial.description,
           'skills -> partial.skills,
+          'application -> partial.application,
           'contract -> partial.contract,
           'city -> partial.city,
           'country -> partial.country,

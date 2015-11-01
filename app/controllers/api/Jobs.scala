@@ -3,11 +3,12 @@ package controllers.api
 import play.api.mvc._
 import repository.JobRepository
 import play.api.libs.json._
+import security.EmployerSecuredAction
 
-class JobsApi extends Controller {
+class Jobs extends Controller with EmployerSecuredAction {
 
   def index = Action {
-    val jobs = JobRepository.all()
+    val jobs = JobRepository.all(50)
     Ok(Json.toJson(jobs))
   }
 
@@ -17,9 +18,9 @@ class JobsApi extends Controller {
     } getOrElse NotFound.as("application/json")
   }
 
-  def create = Action {
+  def create = withEmployer { employer => { implicit request =>
     NotImplemented
-  }
+  }}
 
   def update(id: Long) = Action {
     NotImplemented

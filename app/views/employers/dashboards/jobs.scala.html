@@ -1,0 +1,20 @@
+@(jobs: List[model.Job])
+
+@import helpers.Format
+
+<h2>Your Jobs</h2>
+
+<table class="table striped">
+    <tr>
+        <th>Job Title</th>
+        <th>Posted On</th>
+        <th>Views</th>
+    </tr>
+    @jobs.map { job =>
+    <tr>
+        <td><a href="@routes.Jobs.edit(job.id.get)">@job.title</a></td>
+        <td>@Format.humanDate(job.created)</td>
+        <td>2342</td>
+    </tr>
+    }
+</table>

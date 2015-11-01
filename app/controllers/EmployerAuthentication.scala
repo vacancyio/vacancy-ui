@@ -26,7 +26,7 @@ class EmployerAuthentication extends Controller {
       },
       employer => {
        if (Employer.authenticate(employer.email, employer.password))
-         Redirect(routes.Jobs.standard()).withSession("email" -> employer.email)
+         Redirect(routes.Dashboard.employers()).withSession("email" -> employer.email)
        else BadRequest(views.html.employers.login(loginForm))
       })
   }

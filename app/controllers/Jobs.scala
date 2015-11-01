@@ -7,15 +7,16 @@ import play.api.mvc._
 import repository.JobRepository
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
-import security.SecuredAction
+import security.EmployerSecuredAction
 
-class Jobs extends Controller with SecuredAction {
+class Jobs extends Controller with EmployerSecuredAction {
 
   private val jobForm = Form(
     mapping(
       "title" -> nonEmptyText,
       "description" -> nonEmptyText,
-      "skills" -> text,
+      "skills" -> optional(text),
+      "apply" -> optional(text),
       "contract" -> number,
       "remote" -> boolean,
       "city" -> optional(text),
