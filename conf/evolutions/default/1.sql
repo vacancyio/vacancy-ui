@@ -6,7 +6,8 @@ CREATE TABLE Employers(
     name text NOT NULL UNIQUE,
     email text NOT NULL UNIQUE,
     password text NOT NULL,
-    created TIMESTAMP WITH TIME ZONE NOT NULL
+    created TIMESTAMP WITH TIME ZONE NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE SEQUENCE job_id_seq;
