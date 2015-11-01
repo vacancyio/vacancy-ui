@@ -24,7 +24,7 @@ GET     /jobs/promoted       controllers.Jobs.promoted
 GET     /jobs/:id            controllers.Jobs.show(id: Long)
 GET     /jobs/:id/edit       controllers.Jobs.edit(id: Long)
 
-PUT    /jobs/:id             controllers.Jobs.update(id: Long)
+POST    /jobs/:id             controllers.Jobs.update(id: Long)
 
 ## API
 # =====================================================

@@ -56,6 +56,15 @@ object JobRepository {
     }
   }
 
+  def update(employer: Employer, partial: JobPartial): Option[Int] = DB.withConnection { implicit c =>
+    employer.id map { id =>
+      SQL("UPDATE jobs SET title = {title} WHERE id = {id}").on(
+        'id    -> id,
+        'title -> partial.title
+      ).executeUpdate()
+    }
+  }
+
   def forEmployer(id: Long): List[Job] = DB.withConnection { implicit c =>
     SQL("SELECT * FROM jobs WHERE employer_id = {id}").on('id -> id).as(rowParser.*)
   }

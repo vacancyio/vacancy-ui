@@ -42,7 +42,19 @@ class Jobs extends Controller with SecuredAction {
   }}
 
   def update(id: Long) = withEmployer { employer => { implicit request =>
-    NotImplemented
+    jobForm.bindFromRequest.fold(
+      formWithErrors => {
+        JobRepository.findOneById(id) map { job =>
+          Ok(views.html.jobs.edit(job, formWithErrors))
+        } getOrElse NotFound
+      },
+      jobPartial => {
+        JobRepository.update(employer, jobPartial)
+        Redirect(routes.Jobs.show(id))
+          .flashing("success" -> "Job updated successfully")
+      }
+
+    )
   }}
 
   def selection = Action { implicit request =>
