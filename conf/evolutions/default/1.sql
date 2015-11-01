@@ -1,5 +1,3 @@
-# Users schema
-
 # --- !Ups
 
 CREATE SEQUENCE employer_id_seq;
