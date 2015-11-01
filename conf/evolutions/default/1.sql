@@ -12,7 +12,7 @@ CREATE TABLE Employers(
 
 CREATE SEQUENCE job_id_seq;
 CREATE TABLE Jobs(
-    id bigint NOT NULL DEFAULT nextval('job_id_seq'),
+    id bigint NOT NULL UNIQUE DEFAULT nextval('job_id_seq'),
     title text NOT NULL,
     description text,
     skills text,
