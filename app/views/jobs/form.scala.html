@@ -1,6 +1,8 @@
-@(form: Form[model.JobPartial])(implicit messages: Messages, request: play.api.mvc.RequestHeader)
+@(form: Form[model.JobPartial])(implicit messages: Messages, request: play.api.mvc.RequestHeader, token: play.filters.csrf.CSRF.Token)
 
-@helper.form(action = routes.Jobs.create) {
+@import helper.CSRF
+
+@helper.form(CSRF(routes.Jobs.create)) {
 
 @if(form.hasErrors) {
 <div class="alert alert-error">

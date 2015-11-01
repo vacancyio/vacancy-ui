@@ -1,4 +1,6 @@
-@(form: Form[model.LoginData])(implicit messages: Messages, request: play.api.mvc.RequestHeader)
+@(form: Form[model.LoginData])(implicit messages: Messages, request: play.api.mvc.RequestHeader, token: play.filters.csrf.CSRF.Token)
+
+@import helper.CSRF
 
 @page("Employer login") {
 
@@ -7,7 +9,7 @@
 
         <h2>Login</h2>
 
-        @helper.form(action = routes.EmployerAuthentication.authenticate) {
+        @helper.form(CSRF(routes.EmployerAuthentication.authenticate)) {
             <div class="field">
                 @helper.inputText(form("email"), '_label -> "Email")
             </div>

@@ -10,6 +10,7 @@ libraryDependencies ++= Seq(
   jdbc,
   cache,
   ws,
+  filters,
   evolutions,
   "org.scalaz"        %% "scalaz-core" % "7.1.4",
   "com.typesafe.play" %% "anorm"       % "2.4.0",
