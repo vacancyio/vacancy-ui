@@ -67,6 +67,8 @@ object EmployerRepository {
    * @param id The employer primary key ID
    */
   def incrementCredits(id: Long, amount: Int = 1) = DB.withConnection { implicit c =>
-    SQL("UPDATE employers SET credits = credits + {amount} WHERE id = {id}").on('id -> id, 'amount -> amount).executeUpdate()
+    SQL("UPDATE employers SET credits = credits + {amount} WHERE id = {id}")
+      .on('id -> id, 'amount -> amount)
+      .executeUpdate()
   }
 }
