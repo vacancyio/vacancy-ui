@@ -43,12 +43,8 @@ object EmployerRepository {
    */
   def insert(partial: EmployerPartial): Option[Long] = DB.withConnection { implicit c =>
     SQL("INSERT INTO employers (name, email, password, created) VALUES ({name}, {email}, {password}, {created})")
-      .on(
-        'name -> partial.name,
-        'email -> partial.email,
-        'password -> Encrypt.encryptPassword(partial.password),
-        'created -> new Date
-      ).executeInsert()
+      .on('name -> partial.name, 'email -> partial.email, 'password -> Encrypt.encryptPassword(partial.password), 'created -> new Date)
+      .executeInsert()
   }
 
   /**
