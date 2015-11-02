@@ -2,6 +2,16 @@
 
 ## Employers
 
+Expiry logic for jobs after 30 days 
+
+```
+USE SQL 
+
+With function
+
+def expired(job: Job) = job.created < 30 days.ago
+```
+
 Employer payment and credits
 
 Metrics dashboard
