@@ -36,9 +36,10 @@ class Jobs extends Controller with EmployerSecuredAction {
   }
 
   def edit(id: Long) = withEmployer { employer => { implicit request =>
-    val job = employer.id flatMap { employerID => JobRepository.findOneByIdForEmployer(employerID, id) }
-    job map { j =>
-      Ok(views.html.jobs.edit(j, jobForm))
+    val maybeJob = employer.id flatMap { employerID => JobRepository.findOneByIdForEmployer(employerID, id) }
+    maybeJob map { job =>
+      val partial = JobPartial(job.title, job.description, job.skills, job.application, job.contract, job.remote, job.city, job.country)
+      Ok(views.html.jobs.edit(job, jobForm.fill(partial)))
     } getOrElse NotFound
   }}
 

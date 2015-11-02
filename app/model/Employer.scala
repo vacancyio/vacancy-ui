@@ -4,7 +4,7 @@ import play.api.libs.json.Json
 import repository.EmployerRepository
 import security.Encrypt
 
-case class Employer(id: Option[Long], name: String, email: String, password: String, created: java.util.Date)
+case class Employer(id: Option[Long], name: String, email: String, password: String, credits: Int, created: java.util.Date)
 
 object Employer {
 

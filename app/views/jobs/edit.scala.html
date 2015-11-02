@@ -1,11 +1,13 @@
-@(job: model.Job, form: Form[model.JobPartial])(implicit messages: Messages, request: play.api.mvc.RequestHeader)
+@(job: model.Job, form: Form[model.JobPartial])(implicit messages: Messages, request: play.api.mvc.RequestHeader, token: play.filters.csrf.CSRF.Token)
+
+@import helper.CSRF
 
 @page("Create a job post") {
 
 <p>Use the form below to edit your job posting.</p>
 
 <div class="job-form">
-    @helper.form(action = routes.Jobs.update(job.id.get)) {
+    @helper.form(CSRF(routes.Jobs.update(job.id.get))) {
 
     @if(form.hasErrors) {
     <div class="alert alert-error">

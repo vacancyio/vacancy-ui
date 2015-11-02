@@ -39,6 +39,14 @@ object JobRepository {
       .as(rowParser.singleOpt)
   }
 
+  /**
+   * Insert a [[model.Job]] into the database
+   *
+   * A single job is always associated with an employer
+   *
+   * @param employer An employer submitting this [[model.Job]]
+   * @param partial The partial form data for this [[model.Job]]
+   */
   def insert(employer: Employer, partial: JobPartial): Option[Long] = DB.withConnection { implicit c =>
     employer.id flatMap { id =>
       val fields = "(title, description, skills, application, contract, city, country, employer_id, created)"
@@ -58,11 +66,21 @@ object JobRepository {
     }
   }
 
+
+  // TODO not working !
   def update(employer: Employer, partial: JobPartial): Option[Int] = DB.withConnection { implicit c =>
     employer.id map { id =>
-      SQL("UPDATE jobs SET title = {title} WHERE id = {id}").on(
+      SQL(
+        """UPDATE jobs SET title = {title}, description = {description}, skills = {skills}, application = {application}, contract = {contract}, remote = {remote}, city = {city}, country = {country} WHERE id = {id}""").on(
         'id    -> id,
-        'title -> partial.title
+        'title -> partial.title,
+        'description -> partial.description,
+        'skills -> partial.skills,
+        'application -> partial.application,
+        'contract -> partial.contract,
+        'remote -> partial.remote,
+        'city -> partial.city,
+        'country -> partial.country
       ).executeUpdate()
     }
   }

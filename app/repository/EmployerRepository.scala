@@ -15,8 +15,10 @@ object EmployerRepository {
     get[String]("name") ~
     get[String]("email") ~
     get[String]("password") ~
-    get[Date]("created") map { case id ~ name ~ email ~ password ~ created =>
-      Employer(Some(id), name, email, password, created)
+    get[Int]("credits") ~
+    get[Date]("created") map {
+      case id ~ name ~ email ~ password ~ credits ~ created =>
+        Employer(Some(id), name, email, password, credits, created)
     }
   }
 
@@ -33,6 +35,12 @@ object EmployerRepository {
     SQL("SELECT * from employers WHERE email = {email}").on('email -> email).as(rowParser.singleOpt)
   }
 
+  /**
+   * Insert a [[model.Employer]] into the database
+   *
+   * @param partial
+   * @return
+   */
   def insert(partial: EmployerPartial): Option[Long] = DB.withConnection { implicit c =>
     SQL("INSERT INTO employers (name, email, password, created) VALUES ({name}, {email}, {password}, {created})")
       .on(
@@ -41,5 +49,24 @@ object EmployerRepository {
         'password -> Encrypt.encryptPassword(partial.password),
         'created -> new Date
       ).executeInsert()
+  }
+
+  /**
+   * Returns the number of credits for a [[model.Employer]]
+   *
+   * @param id The employer primary key ID
+   */
+  def numberOfCredits(id: Long): Int = DB.withConnection { implicit c =>
+    SQL("SELECT credits FROM employers where id = {id}").on('id -> id).as(scalar[Int].single)
+  }
+
+  /**
+   * Give an exiting employer 1 credit. This would be done typically after a
+   * purchase order of additional credits
+   *
+   * @param id The employer primary key ID
+   */
+  def incrementCredits(id: Long, amount: Int = 1) = DB.withConnection { implicit c =>
+    SQL("UPDATE employers SET credits = credits + {amount} WHERE id = {id}").on('id -> id, 'amount -> amount).executeUpdate()
   }
 }

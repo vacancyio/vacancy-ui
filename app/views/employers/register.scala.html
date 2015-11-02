@@ -1,4 +1,6 @@
-@(form: Form[model.EmployerPartial])(implicit messages: Messages, request: play.api.mvc.RequestHeader)
+@(form: Form[model.EmployerPartial])(implicit messages: Messages, request: play.api.mvc.RequestHeader, token: play.filters.csrf.CSRF.Token)
+
+@import helper.CSRF
 
 @page("Register your company") {
 
@@ -11,7 +13,7 @@
             <p>Register an account and start connecting with talented developers instantly</p>
         </header>
 
-        @helper.form(action = routes.Employers.create) {
+        @helper.form(CSRF(routes.Employers.create)) {
         <div class="field">
             @helper.inputText(form("name"), '_label -> "Company Name")
         </div>

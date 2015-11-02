@@ -3,10 +3,11 @@
 CREATE SEQUENCE employer_id_seq;
 CREATE TABLE Employers(
     id bigint NOT NULL UNIQUE DEFAULT nextval('employer_id_seq'),
-    name text NOT NULL UNIQUE,
+    name text NOT NULL,
     email text NOT NULL UNIQUE,
     password text NOT NULL,
     created TIMESTAMP WITH TIME ZONE NOT NULL,
+    credits int DEFAULT 0,
     PRIMARY KEY (id)
 );
 
