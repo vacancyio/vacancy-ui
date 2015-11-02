@@ -12,8 +12,5 @@ case class JobPartial(title: String,
                       country: String)
 
 object JobPartial {
-
   implicit val format = Json.format[JobPartial]
 }
-
-
