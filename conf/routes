@@ -35,20 +35,20 @@ POST    /jobs/:id            controllers.Jobs.update(id: Long)
 # Users
 # =====================================================
 
-GET /users/:username          controllers.Users.show(username: String)
+GET /users/:username         controllers.Users.show(username: String)
 
 ## API
 # =====================================================
 
-GET    /api/v1/jobs              controllers.api.Jobs.index
-GET    /api/v1/jobs/:id          controllers.api.Jobs.show(id: Long)
-POST   /api/v1/jobs              controllers.api.Jobs.create
-PUT    /api/v1/jobs/:id          controllers.api.Jobs.update(id: Long)
-DELETE /api/v1/jobs/:id         controllers.api.Jobs.delete(id: Long)
+GET    /api/v1/jobs          controllers.api.Jobs.index
+GET    /api/v1/jobs/:id      controllers.api.Jobs.show(id: Long)
+POST   /api/v1/jobs          controllers.api.Jobs.create
+PUT    /api/v1/jobs/:id      controllers.api.Jobs.update(id: Long)
+DELETE /api/v1/jobs/:id      controllers.api.Jobs.delete(id: Long)
 
 # Promoted
 # =====================================================
-GET    /promoted         controllers.Promoted.index
+GET    /promoted             controllers.Promoted.index
 
 # =====================================================
-GET     /assets/*file    controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
