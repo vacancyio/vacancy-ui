@@ -37,7 +37,7 @@ POST    /jobs/:id            controllers.Jobs.update(id: Long)
 
 GET /users/:username         controllers.Users.show(username: String)
 
-## API
+# API
 # =====================================================
 
 GET    /api/v1/jobs          controllers.api.Jobs.index
