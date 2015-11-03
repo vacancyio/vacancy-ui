@@ -12,7 +12,6 @@ import play.api.test.Helpers._
 class JobsSpec extends Specification with ControllerTestHelpers {
 
   "The jobs controller" should {
-
     "render the job overview page" in new WithApplication {
       getStatus(routes.Jobs.index().url) must equalTo(Some(OK))
     }
