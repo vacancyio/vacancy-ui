@@ -7,7 +7,6 @@ import security.Encrypt
 case class Employer(id: Option[Long], name: String, email: String, password: String, credits: Int, created: java.util.Date)
 
 object Employer {
-
   implicit val format = Json.format[Employer]
 
   def authenticate(email: String, password: String): Boolean =
