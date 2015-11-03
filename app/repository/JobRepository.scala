@@ -8,7 +8,6 @@ import play.api.db.DB
 import java.util.Date
 
 object JobRepository {
-
   private val rowParser: RowParser[Job] = {
     get[Long]("id") ~
       get[String]("title") ~
@@ -66,7 +65,6 @@ object JobRepository {
         ).executeInsert()
     }
   }
-
 
   // TODO not working !
   def update(employer: Employer, partial: JobPartial): Option[Int] = DB.withConnection { implicit c =>
