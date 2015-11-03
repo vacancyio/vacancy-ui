@@ -5,7 +5,6 @@ import org.joda.time.format.DateTimeFormat
 import play.twirl.api.HtmlFormat
 
 object Format {
-
   /**
    * View pluralization helper
    *
@@ -19,7 +18,6 @@ object Format {
     format.print(new DateTime(date))
   }
 
-  def formatInput(input: String): String = {
+  def formatInput(input: String): String =
     HtmlFormat.escape(input).toString().replace("\n", "<br />")
-  }
 }
