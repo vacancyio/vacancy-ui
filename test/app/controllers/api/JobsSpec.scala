@@ -12,11 +12,8 @@ import play.api.test.Helpers._
 class JobsSpec extends Specification with ControllerTestHelpers {
 
   "The jobs api controller" should {
-
     "return a list of jobs as JSON" in new WithApplication {
-
       val response = route(FakeRequest(GET, "/api/v1/jobs"))
-
       response map status mustEqual Some(OK)
     }
   }
