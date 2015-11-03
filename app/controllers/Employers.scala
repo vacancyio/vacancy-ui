@@ -16,8 +16,7 @@ class Employers extends Controller {
       "email" -> nonEmptyText,
       "password" -> nonEmptyText
     )(EmployerPartial.apply)(EmployerPartial.unapply) verifying("Email already exists", fields => fields match {
-      case data => EmployerRepository.findOneByEmail(data.email).isEmpty
-    }))
+      case data => EmployerRepository.findOneByEmail(data.email).isEmpty }))
 
   def index = Action { implicit request =>
     val employers = EmployerRepository.all()
@@ -43,7 +42,6 @@ class Employers extends Controller {
         EmployerRepository.insert(employerData)
         Redirect(routes.Dashboard.employers())
           .withSession("email" -> employerData.email)
-
       }
     )
   }
