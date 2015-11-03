@@ -12,7 +12,6 @@ import play.api.test.Helpers._
 class EmployerAuthenticationSpec extends Specification with ControllerTestHelpers {
 
   "The employer authentication controller" should {
-
     "render the login page" in new WithApplication {
       getStatus(routes.EmployerAuthentication.login().url) must equalTo(Some(OK))
     }
