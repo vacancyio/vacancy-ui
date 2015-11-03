@@ -12,11 +12,9 @@ import play.api.test.Helpers._
  */
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
-  
-  def getStatus(url: String): Option[Int] = route(FakeRequest(GET, url)) map status
+  private def getStatus(url: String): Option[Int] = route(FakeRequest(GET, url)) map status
 
   "Application" should {
-
     "render the index page" in new WithApplication {
       getStatus("/") must equalTo(Some(OK))
     }
