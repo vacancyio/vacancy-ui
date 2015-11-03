@@ -11,7 +11,6 @@ import play.api.test.Helpers._
 class StaticSpec extends Specification with ControllerTestHelpers {
 
   "The static controller" should {
-
     "render the index page" in new WithApplication {
       getStatus("/") must equalTo(Some(OK))
     }
