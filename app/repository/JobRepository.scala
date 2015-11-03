@@ -67,8 +67,7 @@ object JobRepository {
   }
 
   // TODO not working !
-  def update(employer: Employer, partial: JobPartial): Option[Int] = DB.withConnection { implicit c =>
-    employer.id map { id =>
+  def update(id: Long, partial: JobPartial): Int = DB.withConnection { implicit c =>
       SQL(
         """UPDATE jobs SET title = {title}, description = {description}, skills = {skills}, application = {application}, contract = {contract}, remote = {remote}, city = {city}, country = {country} WHERE id = {id}""").on(
         'id    -> id,
@@ -81,7 +80,6 @@ object JobRepository {
         'city -> partial.city,
         'country -> partial.country
       ).executeUpdate()
-    }
   }
 
   def forEmployer(id: Long): List[Job] = DB.withConnection { implicit c =>

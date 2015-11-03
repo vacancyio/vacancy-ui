@@ -51,7 +51,7 @@ class Jobs extends Controller with EmployerSecuredAction {
         } getOrElse NotFound
       },
       jobPartial => {
-        JobRepository.update(employer, jobPartial)
+        JobRepository.update(id, jobPartial)
         Redirect(routes.Jobs.show(id))
           .flashing("success" -> "Job updated successfully")
       }
