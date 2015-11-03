@@ -55,7 +55,6 @@ class Jobs extends Controller with EmployerSecuredAction {
         Redirect(routes.Jobs.show(id))
           .flashing("success" -> "Job updated successfully")
       }
-
     )
   }}
 
