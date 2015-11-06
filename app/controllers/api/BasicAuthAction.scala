@@ -5,7 +5,6 @@ import play.api.mvc._
 import scala.concurrent.Future
 
 object BasicAuthAction extends ActionBuilder[Request] with ActionFilter[Request] {
-
   private val unauthorized =
     Results.Unauthorized.withHeaders("WWW-Authenticate" -> "Basic realm=Unauthorized")
 
@@ -14,7 +13,6 @@ object BasicAuthAction extends ActionBuilder[Request] with ActionFilter[Request]
       val (email, pass) = decodeBasicAuth(authHeader)
       if (Employer.authenticate(email, pass)) None else Some(unauthorized)
     } getOrElse Some(unauthorized)
-
     Future.successful(result)
   }
 
