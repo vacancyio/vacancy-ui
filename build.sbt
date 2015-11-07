@@ -1,4 +1,4 @@
-name := """vacancy-ui"""
+name := """vacancy"""
 
 version := "1.0-SNAPSHOT"
 
