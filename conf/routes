@@ -20,7 +20,7 @@ GET     /dashboard           controllers.Dashboard.employers
 # Jobs
 # =====================================================
 
-GET     /jobs                controllers.Jobs.index
+GET     /jobs                controllers.Jobs.index(query: Option[String] ?= None)
 POST    /jobs                controllers.Jobs.create
 
 GET     /jobs/new            controllers.Jobs.selection

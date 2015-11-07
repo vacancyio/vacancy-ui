@@ -9,7 +9,6 @@ import play.api.i18n.Messages.Implicits._
 import repository.EmployerRepository
 
 class Employers extends Controller {
-
   private val employerRegistrationForm = Form(
     mapping(
       "name" -> nonEmptyText,
@@ -39,7 +38,11 @@ class Employers extends Controller {
         Ok(views.html.employers.register(formWithErrors)).flashing("error" -> "Form contains errors")
       },
       employerData => {
-        EmployerRepository.insert(employerData)
+        val maybeId = EmployerRepository.insert(employerData)
+        maybeId foreach { id =>
+          EmployerRepository.giveCredits(id, 2)
+        }
+
         Redirect(routes.Dashboard.employers())
           .withSession("email" -> employerData.email)
       }

@@ -4,10 +4,9 @@
 
 @page("Job listing") {
 
-    <h2>
-        @job.employerInformation.map(_.name) is hiring a @job.title
-    </h2>
+    <h2>@job.title</h2>
 
+    <p>Posted by @job.employerInformation.map(_.name)</p>
     <p>Contract Type: @job.contractName</p>
     <p>Posted: @Format.humanDate(job.created)</p>
 
@@ -26,6 +25,13 @@
         <h3>Skills</h3>
         @job.skills.map { skills =>
           @Html(Format.formatInput(skills))
+        }
+    </div>
+
+    <div class="apply">
+        <h3>How to apply</h3>
+        @job.application.map { app =>
+          @Html(Format.formatInput(app))
         }
     </div>
 

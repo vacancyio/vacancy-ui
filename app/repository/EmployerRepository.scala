@@ -36,10 +36,9 @@ object EmployerRepository {
   }
 
   /**
-   * Insert a [[model.Employer]] into the database
+   * Insert an employer into the database
    *
-   * @param partial
-   * @return
+   * @param partial Partial employer data from form
    */
   def insert(partial: EmployerPartial): Option[Long] = DB.withConnection { implicit c =>
     SQL("INSERT INTO employers (name, email, password, created) VALUES ({name}, {email}, {password}, {created})")
@@ -48,7 +47,7 @@ object EmployerRepository {
   }
 
   /**
-   * Returns the number of credits for a [[model.Employer]]
+   * Returns the number of credits for an employer
    *
    * @param id The employer primary key ID
    */
@@ -57,12 +56,13 @@ object EmployerRepository {
   }
 
   /**
-   * Give an exiting employer 1 credit. This would be done typically after a
-   * purchase order of additional credits
+   * Give an exiting employer credits. Credits can be used to purchase job postings
+   *
+   * This would be done typically after a purchase order of additional credits
    *
    * @param id The employer primary key ID
    */
-  def incrementCredits(id: Long, amount: Int = 1) = DB.withConnection { implicit c =>
+  def giveCredits(id: Long, amount: Int = 1) = DB.withConnection { implicit c =>
     SQL("UPDATE employers SET credits = credits + {amount} WHERE id = {id}")
       .on('id -> id, 'amount -> amount)
       .executeUpdate()

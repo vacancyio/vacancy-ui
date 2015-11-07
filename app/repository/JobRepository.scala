@@ -26,7 +26,14 @@ object JobRepository {
   }
 
   def all(limit: Int = 100): List[Job] = DB.withConnection { implicit c =>
-    SQL("SELECT * FROM jobs ORDER BY id DESC LIMIT {limit}").on('limit -> limit).as(rowParser.*)
+    SQL("""SELECT * FROM jobs WHERE created > current_date - interval '60 days' ORDER BY id DESC LIMIT {limit}""")
+      .on('limit -> limit)
+      .as(rowParser.*)
+  }
+
+  def search(query: String) = DB.withConnection { implicit c =>
+    SQL(s"""SELECT * FROM jobs WHERE lower(title) LIKE '${"%" + query.toLowerCase + "%"}' OR lower(description) LIKE '${"%" + query.toLowerCase + "%"}'""")
+      .as(rowParser.*)
   }
 
   def findOneById(id: Long): Option[Job] = DB.withConnection { implicit c =>
@@ -40,12 +47,12 @@ object JobRepository {
   }
 
   /**
-   * Insert a [[model.Job]] into the database
+   * Insert a job into the database
    *
    * A single job is always associated with an employer
    *
-   * @param employer An employer submitting this [[model.Job]]
-   * @param partial The partial form data for this [[model.Job]]
+   * @param employer An employer submitting this job
+   * @param partial The partial form data for this job
    */
   def insert(employer: Employer, partial: JobPartial): Option[Long] = DB.withConnection { implicit c =>
     employer.id flatMap { id =>
@@ -69,7 +76,8 @@ object JobRepository {
   // TODO not working !
   def update(id: Long, partial: JobPartial): Int = DB.withConnection { implicit c =>
       SQL(
-        """UPDATE jobs SET title = {title}, description = {description}, skills = {skills}, application = {application}, contract = {contract}, remote = {remote}, city = {city}, country = {country} WHERE id = {id}""").on(
+        """UPDATE jobs SET title = {title}, description = {description}, skills = {skills}, application = {application},
+          |contract = {contract}, remote = {remote}, city = {city}, country = {country} WHERE id = {id}""".stripMargin).on(
         'id    -> id,
         'title -> partial.title,
         'description -> partial.description,

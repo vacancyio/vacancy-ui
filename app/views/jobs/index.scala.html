@@ -13,8 +13,13 @@
         </div>
     </div>
 
-    <ul class="jobs">
+    @if(jobs.isEmpty) {
+      <div class="info">
+          There are no currently active jobs
+      </div>
+    }
 
+    <ul class="jobs">
         @jobs.map { job =>
             <li class="job">
                 <div class="row">

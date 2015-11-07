@@ -16,7 +16,7 @@ class Jobs extends Controller with EmployerSecuredAction {
       "title" -> nonEmptyText,
       "description" -> nonEmptyText,
       "skills" -> optional(text),
-      "apply" -> optional(text),
+      "application" -> optional(text),
       "contract" -> number,
       "remote" -> boolean,
       "city" -> optional(text),
@@ -24,8 +24,12 @@ class Jobs extends Controller with EmployerSecuredAction {
     )(JobPartial.apply)(JobPartial.unapply)
   )
 
-  def index = Action { implicit request =>
-    val jobs = JobRepository.all()
+  def index(query: Option[String] = None) = Action { implicit request =>
+    val jobs = query match {
+      case Some(q) => JobRepository.search(q)
+      case None    => JobRepository.all()
+    }
+
     Ok(views.html.jobs.index(jobs))
   }
 
@@ -75,6 +79,7 @@ class Jobs extends Controller with EmployerSecuredAction {
           .flashing("error" -> "Form contains errors")
       },
       jobPartial => {
+        println(request.body)
         JobRepository.insert(employer, jobPartial) // TODO check for errors!
         Redirect(routes.Jobs.index())
           .flashing("success" -> "Job added successfully")
