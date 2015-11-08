@@ -3,29 +3,27 @@
 @import helper.CSRF
 
 @page("Register your company") {
+    <div class="row">
+        <div class="col-md-8">
+            <header class="push">
+                <h1>Find developers for your team</h1>
+                <p>Register an account and start connecting with talented software developers instantly</p>
+            </header>
 
-<div class="row">
-    <div class="col-md-8">
-        <header class="push">
-            <h1>Employer Registration</h1>
-            <p>Register an account and start connecting with talented developers instantly</p>
-        </header>
-
-        @helper.form(CSRF(routes.Employers.create)) {
-        <div class="field">
-            @helper.inputText(form("name"), '_label -> "Company Name")
+            @helper.form(CSRF(routes.Employers.create)) {
+            <div class="field">
+                @helper.inputText(form("name"), '_label -> "Company Name")
+            </div>
+            <div class="field">
+                @helper.inputText(form("email"), '_label -> "Email")
+            </div>
+            <div class="field">
+                @helper.inputText(form("password"), '_label -> "Password")
+            </div>
+            <div class="push">
+                <input type="submit" class="button button-medium" value="Get started"/>
+            </div>
+            }
         </div>
-        <div class="field">
-            @helper.inputText(form("email"), '_label -> "Email")
-        </div>
-        <div class="field">
-            @helper.inputText(form("password"), '_label -> "Password")
-        </div>
-        <div class="push">
-            <input type="submit" class="button button-medium" value="Get started"/>
-        </div>
-        }
     </div>
-</div>
-
 }

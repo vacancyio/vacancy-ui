@@ -15,6 +15,8 @@ case class Job(id: Option[Long],
                employer: Long,
                created: java.util.Date = new java.util.Date) {
 
+  def slug = Job.generateSlug(this.id, this.title)
+
   /**
    * Pretty print for displaying the job location
    */
@@ -37,5 +39,27 @@ case class Job(id: Option[Long],
 object Job {
 
   implicit val format = Json.format[Job]
+
+  def normalizeTitle(title: String) =
+    title.toLowerCase.replace(" ", "-")
+
+  /**
+   * Pretty print for displaying the job location
+   */
+  def location(country: String): String = {
+    helpers.Location.nameFromISO2(country)
+  }
+
+  /**
+   * Generates a URL slug in the form "34-senior-software-engineer"
+   *
+   * @param id The job id
+   * @param title The job title
+   */
+  def generateSlug(id: Option[Long], title: String): String = {
+    val normalisedId = id.map(_.toString).getOrElse("")
+    val normalisedTitle = normalizeTitle(title)
+    s"$normalisedId-$normalisedTitle"
+  }
 }
 

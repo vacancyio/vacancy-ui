@@ -9,19 +9,23 @@
 
         <h2>Login</h2>
 
+        <p>Don't have an account? <a href="@routes.Employers.register()">Sign up</a> in a matter of seconds</p>
+
+        @if(form.errors.nonEmpty) {
+          <p>Email already exists</p>
+        }
+
         @helper.form(CSRF(routes.EmployerAuthentication.authenticate)) {
             <div class="field">
                 @helper.inputText(form("email"), '_label -> "Email")
             </div>
             <div class="field">
-                @helper.inputText(form("password"), '_label -> "Password")
+                @helper.inputPassword(form("password"), '_label -> "Password")
             </div>
             <div class="push">
                 <input type="submit" class="button button-medium" value="Login"/>
             </div>
         }
-
-        <p>Or <a href="@routes.Employers.register()">Sign Up</a></p>
     </div>
 </div>
 

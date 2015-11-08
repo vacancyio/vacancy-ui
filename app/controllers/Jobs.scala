@@ -33,7 +33,8 @@ class Jobs extends Controller with EmployerSecuredAction {
     Ok(views.html.jobs.index(jobs))
   }
 
-  def show(id: Long) = Action { implicit request =>
+  def show(slug: String) = Action { implicit request =>
+    val id = slug.split("-").head.toLong
     JobRepository.findOneById(id) map { job =>
       Ok(views.html.jobs.show(job))
     } getOrElse NotFound
@@ -56,7 +57,7 @@ class Jobs extends Controller with EmployerSecuredAction {
       },
       jobPartial => {
         JobRepository.update(id, jobPartial)
-        Redirect(routes.Jobs.show(id))
+        Redirect(routes.Jobs.show(Job.generateSlug(Some(id), jobPartial.title)))
           .flashing("success" -> "Job updated successfully")
       }
     )

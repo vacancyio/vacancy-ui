@@ -2,9 +2,12 @@
 
 @page("Your dashboard") {
 
-    <h1>@employer.name Dashboard</h1>
+    <div class="banner">
+      <h1>My Dashboard</h1>
+      <p>Hello @employer.name. This is your dashboard for managing and creating new job posts.</p>
+    </div>
 
-    <p>Welcome to Vacancy. This is your dashboard for managing and creating new job posts.</p>
+    <p><a href="@routes.Employers.show(employer.name)">Your profile</a></p>
 
     @if(jobs.isEmpty) {
       <p>You haven't posted any jobs yet. Let's <a href="@routes.Jobs.standard()">create one</a></p>

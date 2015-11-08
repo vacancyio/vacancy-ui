@@ -22,8 +22,8 @@ class Employers extends Controller {
     Ok(views.html.employers.index(employers))
   }
 
-  def show(id: Long) = Action { implicit request =>
-    EmployerRepository.findOneById(id) map { employer =>
+  def show(name: String) = Action { implicit request =>
+    EmployerRepository.findOneByName(name) map { employer =>
       Ok(views.html.employers.show(employer))
     } getOrElse NotFound
   }
@@ -35,7 +35,8 @@ class Employers extends Controller {
   def create = Action { implicit request =>
     employerRegistrationForm.bindFromRequest.fold(
       formWithErrors => {
-        Ok(views.html.employers.register(formWithErrors)).flashing("error" -> "Form contains errors")
+        println(formWithErrors.errors)
+        Ok(views.html.employers.register(formWithErrors))
       },
       employerData => {
         EmployerRepository.insert(employerData)

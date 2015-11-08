@@ -4,34 +4,40 @@
 
 @page("Job listing") {
 
-    <h2>@job.title</h2>
-
-    <p>Posted by @job.employerInformation.map(_.name)</p>
-    <p>Contract Type: @job.contractName</p>
-    <p>Posted: @Format.humanDate(job.created)</p>
-
-    @if(job.remote) {
-        <p>Remote: Yes</p>
-    } else {
-        <p>Remote: No</p>
-    }
-
-    <div class="description">
-        <h3>Description</h3>
-        @Html(Format.formatInput(job.description))
+    <div class="col-md-12 banner">
+        <h2>@job.title</h2>
+        <h3>A @job.contractName role with @job.employerInformation.map(_.name)</h3>
     </div>
 
-    <div class="skills">
-        <h3>Skills</h3>
-        @job.skills.map { skills =>
-          @Html(Format.formatInput(skills))
-        }
+    <div class="col-md-8">
+        <div class="description">
+            <h3>Description</h3>
+            @Html(Format.formatInput(job.description))
+        </div>
+
+        <div class="skills">
+            <h3>Skills</h3>
+            @job.skills.map { skills =>
+            @Html(Format.formatInput(skills))
+            }
+        </div>
+
+        <div class="apply">
+            <h3>How to apply</h3>
+            @job.application.map { app =>
+            @Html(Format.formatInput(app))
+            }
+        </div>
     </div>
 
-    <div class="apply">
-        <h3>How to apply</h3>
-        @job.application.map { app =>
-          @Html(Format.formatInput(app))
+    <div class="col-md-4">
+        <h3>Overview</h3>
+        <p>Posted: @Format.humanDate(job.created)</p>
+
+        @if(job.remote) {
+            <p>Remote: Yes</p>
+        } else {
+            <p>Remote: No</p>
         }
     </div>
 

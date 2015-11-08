@@ -44,13 +44,29 @@
 .jobs h4 { text-transform: capitalize; margin: 0; }
 
 .job {
-  padding: 12px 24px;
-  border-bottom: 2px solid #eee;
+  padding: 24px 0;
+  border-bottom: 2px solid #e2e2e2;
+  clear: both;
+  overflow: hidden;
+  position: relative;
+
+  .title {
+      font-weight: bold; margin: 0 0 6px 0; padding: 0;
+  }
+
+  .summary {color: @text; }
+
+  .meta { margin: 0 0 6px 0; color: #999; }
 }
 
-h4 { margin-top: 0; }
+.job:first-child { border-top: 2px solid #e2e2e2; }
 
-.job .location, .job .meta { color: #999; }
+.banner {
+
+    padding-bottom: 36px; border-bottom: 6px solid @text; margin-bottom: 24px;
+
+    h3 { color: @text; }
+}
 
 .pricing {
   background: #fafafa;

@@ -6,7 +6,7 @@
     <p>No employers found in the system</p>
   } else {
     @employers.map { employer =>
-        <a href="@routes.Employers.show(employer.id.get)">@employer.name</a>
+        <a href="@routes.Employers.show(employer.name)">@employer.name</a>
     }
   }
 }

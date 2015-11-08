@@ -8,13 +8,11 @@
     <tr>
         <th>Job Title</th>
         <th>Posted On</th>
-        <th>Views</th>
     </tr>
     @jobs.map { job =>
     <tr>
-        <td><a href="@routes.Jobs.edit(job.id.get)">@job.title</a></td>
+        <td><a href="@routes.Jobs.edit(job.id.get)"><strong>@job.title</strong></a></td>
         <td>@Format.humanDate(job.created)</td>
-        <td>2342</td>
     </tr>
     }
 </table>

@@ -19,22 +19,16 @@
       </div>
     }
 
-    <ul class="jobs">
+    <div class="jobs">
         @jobs.map { job =>
-            <li class="job">
-                <div class="row">
-                    <div class="col-md-7">
-                        <h4><a href="@routes.Jobs.show(job.id.get)">@job.title</a></h4>
-                    </div>
-                    <div class="location col-md-2">
-                        @job.location()
-                    </div>
-                    <div class="meta col-md-3">
-                        @Format.humanDate(job.created)
-                    </div>
-                </div>
-            </li>
+            <div class="job">
+                <a href="@routes.Jobs.show(job.slug)">
+                    <h3 class="title">@job.title</h3>
+                    <div class="meta">@job.location() @Format.humanDate(job.created)</div>
+                    <div class="summary">Haskell, Clojure, Scala</div>
+                </a>
+            </div>
         }
-    </ul>
+    </div>
 
 }

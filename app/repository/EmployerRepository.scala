@@ -35,6 +35,10 @@ object EmployerRepository {
     SQL("SELECT * from employers WHERE email = {email}").on('email -> email).as(rowParser.singleOpt)
   }
 
+  def findOneByName(name: String): Option[Employer] = DB.withConnection { implicit c =>
+    SQL("SELECT * from employers WHERE name = {name}").on('name -> name).as(rowParser.singleOpt)
+  }
+
   /**
    * Insert an employer into the database
    *

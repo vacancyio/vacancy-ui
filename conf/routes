@@ -9,7 +9,7 @@ POST    /employers/login     controllers.EmployerAuthentication.authenticate
 
 GET     /employers           controllers.Employers.index
 GET     /employers/register  controllers.Employers.register
-GET     /employers/:id       controllers.Employers.show(id: Long)
+GET     /employers/:name     controllers.Employers.show(name: String)
 POST    /employers           controllers.Employers.create
 
 # Dashboards
@@ -27,7 +27,7 @@ GET     /jobs/new            controllers.Jobs.selection
 GET     /jobs/standard       controllers.Jobs.standard
 GET     /jobs/promoted       controllers.Jobs.promoted
 
-GET     /jobs/:id            controllers.Jobs.show(id: Long)
+GET     /jobs/:id            controllers.Jobs.show(id: String)
 GET     /jobs/:id/edit       controllers.Jobs.edit(id: Long)
 
 POST    /jobs/:id            controllers.Jobs.update(id: Long)
@@ -40,7 +40,7 @@ GET /users/:username         controllers.Users.show(username: String)
 # API
 # =====================================================
 
-GET    /api/v1/jobs          controllers.api.Jobs.index
+GET    /api/v1/jobs          controllers.api.Jobs.index(page: Int ?= 1)
 GET    /api/v1/jobs/:id      controllers.api.Jobs.show(id: Long)
 POST   /api/v1/jobs          controllers.api.Jobs.create
 PUT    /api/v1/jobs/:id      controllers.api.Jobs.update(id: Long)
