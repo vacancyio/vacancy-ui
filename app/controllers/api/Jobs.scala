@@ -14,7 +14,7 @@ class Jobs extends Controller {
    * PUBLIC
    */
   def index(page: Int = 1) = Action {
-    Ok(Json.toJson(JobRepository.all()))
+    Ok(Json.toJson(JobRepository.all(page)))
   }
 
   /**
