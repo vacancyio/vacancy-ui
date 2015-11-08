@@ -32,7 +32,7 @@ object JobRepository {
   }
 
   def search(query: String) = DB.withConnection { implicit c =>
-    SQL(s"""SELECT * FROM jobs WHERE lower(title) LIKE '${"%" + query.toLowerCase + "%"}' OR lower(description) LIKE '${"%" + query.toLowerCase + "%"}'""")
+    SQL(s"""SELECT * FROM jobs WHERE lower(title) LIKE '${"%" + query.toLowerCase + "%"}' OR lower(description) LIKE '${"%" + query.toLowerCase + "%"}' OR lower(skills) LIKE '${"%" + query.toLowerCase + "%"}'""")
       .as(rowParser.*)
   }
 

@@ -1,6 +1,7 @@
 @(job: model.Job)(implicit request: play.api.mvc.RequestHeader)
 
 @import helpers.Format
+@import analysis.JobAnalysis
 
 @page("Job listing") {
 
@@ -9,7 +10,15 @@
         <h3>A @job.contractName role with @job.employerInformation.map(_.name)</h3>
     </div>
 
+<div class="row">
+
     <div class="col-md-8">
+        <ul>
+            @JobAnalysis.tagsForJob(job).map { tag =>
+                <li class="tag">@tag</li>
+            }
+        </ul>
+
         <div class="description">
             <h3>Description</h3>
             @Html(Format.formatInput(job.description))
@@ -24,9 +33,7 @@
 
         <div class="apply">
             <h3>How to apply</h3>
-            @job.application.map { app =>
-            @Html(Format.formatInput(app))
-            }
+            @Html(Format.formatInput(job.application.getOrElse("No information given")))
         </div>
     </div>
 
@@ -40,5 +47,5 @@
             <p>Remote: No</p>
         }
     </div>
-
+</div>
 }

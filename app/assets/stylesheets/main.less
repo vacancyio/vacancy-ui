@@ -32,8 +32,9 @@
 #main {
   margin: 24px 0;
   background: white;
-  padding: 24px;
+  padding: 24px 24px 48px 24px;
   min-height: 950px;
+  overflow: hidden;
 }
 
 .search {
@@ -56,7 +57,9 @@
 
   .summary {color: @text; }
 
-  .meta { margin: 0 0 6px 0; color: #999; }
+  .meta { color: @text; }
+
+  .tags { color: @text; margin: 0 0 6px 0; }
 }
 
 .job:first-child { border-top: 2px solid #e2e2e2; }
@@ -83,4 +86,13 @@
 
 .contracts {
   margin-left: 24px;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  #nav { display: block; }
+
+  #header ul { display: none; }
+
 }

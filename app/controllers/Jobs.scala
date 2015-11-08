@@ -25,6 +25,13 @@ class Jobs extends Controller with EmployerSecuredAction {
   )
 
   def index(query: Option[String] = None) = Action { implicit request =>
+
+    val searchQuery = request.queryString
+
+    val remote = searchQuery.get("remote") flatMap (_.headOption)
+
+    println(remote)
+
     val jobs = query match {
       case Some(q) => JobRepository.search(q)
       case None    => JobRepository.all()
