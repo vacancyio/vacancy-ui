@@ -38,11 +38,7 @@ class Employers extends Controller {
         Ok(views.html.employers.register(formWithErrors)).flashing("error" -> "Form contains errors")
       },
       employerData => {
-        val maybeId = EmployerRepository.insert(employerData)
-        maybeId foreach { id =>
-          EmployerRepository.giveCredits(id, 2)
-        }
-
+        EmployerRepository.insert(employerData)
         Redirect(routes.Dashboard.employers())
           .withSession("email" -> employerData.email)
       }

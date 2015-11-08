@@ -33,6 +33,9 @@
         <div class="field">
             @helper.textarea(form("application"), '_label -> "How to apply")
         </div>
+    </div>
+
+    <div class="col-md-6">
 
         <div class="field">
             <label>Job Type</label>
@@ -40,19 +43,15 @@
                 @model.ContractType.all.map { contract =>
                 <li class="radio">
                     @if(contract.intValue == 1) {
-                      <input type="radio" name="contract" value="@contract.intValue" checked="checked">
+                    <input type="radio" name="contract" value="@contract.intValue" checked="checked">
                     } else {
-                      <input type="radio" name="contract" value="@contract.intValue">
+                    <input type="radio" name="contract" value="@contract.intValue">
                     }
                     <span>@contract.name</span>
                 </li>
                 }
             </ul>
         </div>
-
-    </div>
-
-    <div class="col-md-6">
 
         <h3>Location</h3>
         <div class="field">
