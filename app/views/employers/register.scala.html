@@ -10,6 +10,18 @@
                 <p>Register an account and start connecting with talented software developers instantly</p>
             </header>
 
+            @if(form.hasErrors) {
+              <div class="alert alert-error">
+                @if(form.errors.size > 0) {
+                  <ul>
+                    @form.errors.filterNot(_.message.startsWith("error.required")).map { error =>
+                      <li>@error.message</li>
+                    }
+                  </ul>
+                }
+              </div>
+            }
+
             @helper.form(CSRF(routes.Employers.create)) {
             <div class="field">
                 @helper.inputText(form("name"), '_label -> "Company Name")

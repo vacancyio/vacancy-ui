@@ -14,8 +14,10 @@ class Employers extends Controller {
       "name" -> nonEmptyText,
       "email" -> nonEmptyText,
       "password" -> nonEmptyText
-    )(EmployerPartial.apply)(EmployerPartial.unapply) verifying("Email already exists", fields => fields match {
-      case data => EmployerRepository.findOneByEmail(data.email).isEmpty }))
+    )(EmployerPartial.apply)(EmployerPartial.unapply) verifying("Email or company name already exists", fields => fields match { case data =>
+      EmployerRepository.findOneByEmail(data.email).isEmpty &&
+        EmployerRepository.findOneByName(data.name).isEmpty
+    }))
 
   def index = Action { implicit request =>
     val employers = EmployerRepository.all()

@@ -1,6 +1,6 @@
 @()(implicit request: play.api.mvc.RequestHeader)
 <ul>
-    @if(request.session.isEmpty) {
+    @if(request.session.get("email").isEmpty) {
         <li><a href="@routes.Static.index()">Home</a></li>
     } else {
         <li><a href="@routes.Dashboard.employers">Dashboard</a></li>

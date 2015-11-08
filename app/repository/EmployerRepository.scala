@@ -36,7 +36,7 @@ object EmployerRepository {
   }
 
   def findOneByName(name: String): Option[Employer] = DB.withConnection { implicit c =>
-    SQL("SELECT * from employers WHERE name = {name}").on('name -> name).as(rowParser.singleOpt)
+    SQL("SELECT * from employers WHERE lower(name) = {name}").on('name -> name.toLowerCase).as(rowParser.singleOpt)
   }
 
   /**
