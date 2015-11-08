@@ -37,6 +37,13 @@
             </div>
 
             <div class="field">
+                @helper.textarea(form("application"), '_label -> "How to apply")
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="field">
                 <label>Job Type</label>
                 <ul class="contracts">
                     @model.ContractType.all.map { contract =>
@@ -51,10 +58,6 @@
                     }
                 </ul>
             </div>
-
-        </div>
-
-        <div class="col-md-6">
 
             <h3>Location</h3>
             <div class="field">

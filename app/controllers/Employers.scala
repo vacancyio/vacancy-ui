@@ -6,7 +6,7 @@ import play.api.data.Forms._
 import play.api.mvc._
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
-import repository.EmployerRepository
+import repository.{JobRepository, EmployerRepository}
 
 class Employers extends Controller {
   private val employerRegistrationForm = Form(
@@ -26,7 +26,8 @@ class Employers extends Controller {
 
   def show(name: String) = Action { implicit request =>
     EmployerRepository.findOneByName(name) map { employer =>
-      Ok(views.html.employers.show(employer))
+      val jobs = employer.id map { i => JobRepository.forEmployer(i) } getOrElse Nil
+      Ok(views.html.employers.show(jobs, employer))
     } getOrElse NotFound
   }
 

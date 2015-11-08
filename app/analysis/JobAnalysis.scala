@@ -6,11 +6,30 @@ object JobAnalysis {
 
   def words(input: String) = input.split(" ").toList.map(_.toLowerCase).toSet
 
-  val languages = Set("clojure", "haskell", "scala", "java", "javascript", "python", "ruby")
+  val languages = Set(
+    "clojure",
+    "scheme",
+    "lisp",
+    "haskell",
+    "scala",
+    "java",
+    "javascript",
+    "python",
+    "ruby",
+    "c#",
+    "c++",
+    "f#",
+    "ocaml",
+    "erlang",
+    "golang",
+    "objective c",
+    "swift")
+
+  val environments = Set("windows", "unix", "linux", "ios", "android")
 
   val frameworks = Set("ruby on rails", "spring boot", "spring", "node")
 
-  val allTags = languages ++ frameworks
+  val allTags = languages ++ frameworks ++ environments
 
   /** Returns true if an input contains a given string expr */
   def contains(input: String, expr: String): Boolean =
