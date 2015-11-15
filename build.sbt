@@ -20,6 +20,15 @@ libraryDependencies ++= Seq(
   specs2 % Test
 )
 
+maintainer in Docker := "Owain Lewis <owain@owainlewis.com>"
+
+dockerExposedPorts in Docker := Seq(9000, 9443)
+
+dockerBaseImage := "dockerfile/java:oracle-java8"
+
+dockerEntrypoint := Seq("bin/vacacny", "-Dconfig.resource=application.prod.conf", "-DapplyEvolutions.default=true")
+
+
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
 // Play provides two styles of routers, one expects its actions to be injected, the
