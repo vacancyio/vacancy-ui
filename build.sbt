@@ -24,7 +24,7 @@ maintainer in Docker := "Owain Lewis <owain@owainlewis.com>"
 
 dockerExposedPorts in Docker := Seq(9000, 9443)
 
-dockerBaseImage := "dockerfile/java:oracle-java8"
+dockerBaseImage := "java:8"
 
 dockerEntrypoint := Seq("bin/vacacny", "-Dconfig.resource=application.prod.conf", "-DapplyEvolutions.default=true")
 
