@@ -28,7 +28,6 @@ dockerBaseImage := "java:8"
 
 dockerEntrypoint := Seq("bin/vacacny", "-Dconfig.resource=application.prod.conf", "-DapplyEvolutions.default=true")
 
-
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
 // Play provides two styles of routers, one expects its actions to be injected, the
