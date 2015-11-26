@@ -25,11 +25,25 @@ object JobAnalysis {
     "objective c",
     "swift")
 
-  val environments = Set("windows", "unix", "linux", "ios", "android")
+  val environments = Set(
+    "windows", 
+    "unix", 
+    "linux", 
+    "ios", 
+    "android")
 
-  val frameworks = Set("ruby on rails", "spring boot", "spring", "node")
+  val frameworks = Set(
+    "ruby on rails", 
+    "spring boot", 
+    "spring", 
+    "node")
+  
+  val ops = Set(
+    "docker", 
+    "vagrant", 
+    "mesos")
 
-  val allTags = languages ++ frameworks ++ environments
+  val allTags = languages ++ frameworks ++ environments ++ ops
 
   /** Returns true if an input contains a given string expr */
   def contains(input: String, expr: String): Boolean =
