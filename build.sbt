@@ -1,3 +1,5 @@
+organization := "io.forward"
+
 name := """vacancy"""
 
 version := "1.0-SNAPSHOT"
