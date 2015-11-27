@@ -9,6 +9,7 @@
   } else {
     @employers.map { employer =>
       <div class="employer">
+          
         <div class="title"><a href="@routes.Employers.show(employer.name)">@employer.name</a></div>
        </div>
     }
