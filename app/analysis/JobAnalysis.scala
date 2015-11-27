@@ -17,7 +17,6 @@ object JobAnalysis {
     "python",
     "ruby",
     "c#",
-    "c++",
     "f#",
     "ocaml",
     "erlang",
