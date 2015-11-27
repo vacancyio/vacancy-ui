@@ -46,7 +46,7 @@ object JobAnalysis {
 
   /** Returns true if an input contains a given string expr */
   def contains(input: String, expr: String): Boolean =
-    input.toLowerCase.matches(s".*${expr.toLowerCase}.*")
+    input.toLowerCase contains s"${expr.toLowerCase} "
 
   /**
    * Given a string and a set of tags, extract any words in the string that also exist
