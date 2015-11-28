@@ -24,7 +24,7 @@
                 <a href="@routes.Jobs.show(job.slug)">
                     <h3 class="title">@job.title</h3>
                     <div class="tags">@JobAnalysis.tagsForJob(job).mkString(", ")</div>
-                    <div class="meta">@job.location() @Format.humanDate(job.created)</div>
+                    <div class="meta">@job.location(), @Format.humanDate(job.created)</div>
                 </a>
             </div>
         }

@@ -20,4 +20,14 @@ object Format {
 
   def formatInput(input: String): String =
     HtmlFormat.escape(input).toString().replace("\n", "<br />")
+
+  /**
+   * Helper function for formatting company names that may contain spaces
+   *
+   */
+  def dash(input: String): String =
+    input.split(" ").mkString("-")
+
+  def unDash(input: String): String =
+    input.split("-").mkString(" ")
 }

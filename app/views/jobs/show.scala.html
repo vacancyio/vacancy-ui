@@ -7,6 +7,7 @@
 
     <div class="col-md-12 banner">
         <h2>@job.title</h2>
+        <p>@job.location()</p>
         <h3>A @job.contractName role with @job.employerInformation.map(_.name)</h3>
     </div>
 
