@@ -15,60 +15,55 @@
 
 <div class="row">
 
-    <div class="col-md-6">
-        <h3>About the role</h3>
+    <h3>About the role</h3>
 
-        <div class="field">
-            @helper.inputText(form("title"), '_label -> "Job title")
-        </div>
-
-        <div class="field">
-            @helper.textarea(form("description"), '_label -> "Job description")
-        </div>
-
-        <div class="field">
-            @helper.textarea(form("skills"), '_label -> "Skills and requirements")
-        </div>
-
-        <div class="field">
-            @helper.textarea(form("application"), '_label -> "How to apply")
-        </div>
+    <div class="field">
+        @helper.inputText(form("title"), '_label -> "Job title")
     </div>
 
-    <div class="col-md-6">
+    <div class="field">
+        @helper.textarea(form("description"), '_label -> "Job description")
+    </div>
 
-        <div class="field">
-            <label>Job Type</label>
-            <ul class="contracts">
-                @model.ContractType.all.map { contract =>
-                <li class="radio">
-                    @if(contract.intValue == 1) {
-                    <input type="radio" name="contract" value="@contract.intValue" checked="checked">
-                    } else {
-                    <input type="radio" name="contract" value="@contract.intValue">
-                    }
-                    <span>@contract.name</span>
-                </li>
+    <div class="field">
+        @helper.textarea(form("skills"), '_label -> "Skills and requirements")
+    </div>
+
+    <div class="field">
+        @helper.textarea(form("application"), '_label -> "How to apply")
+    </div>
+
+    <div class="field">
+        <label>Job Type</label>
+        <ul class="contracts">
+            @model.ContractType.all.map { contract =>
+            <li class="radio">
+                @if(contract.intValue == 1) {
+                <input type="radio" name="contract" value="@contract.intValue" checked="checked">
+                } else {
+                <input type="radio" name="contract" value="@contract.intValue">
                 }
-            </ul>
-        </div>
+                <span>@contract.name</span>
+            </li>
+            }
+        </ul>
+    </div>
 
-        <h3>Location</h3>
-        <div class="field">
-            <p>Does this job allow remote working?</p>
-            @helper.checkbox(form("remote"), 'label -> "Allow remote work")
-        </div>
+    <h3>Location</h3>
+    <div class="field">
+        <p>Does this job allow remote working?</p>
+        @helper.checkbox(form("remote"), 'label -> "Allow remote work")
+    </div>
 
-        <div class="field">
-            <label>City</label>
-            <input type="text" id="city" name="city" placeholder="e.g New York"/>
-        </div>
+    <div class="field">
+        <label>City</label>
+        <input type="text" id="city" name="city" placeholder="e.g New York"/>
+    </div>
 
-        <div class="field">
-            <label>Country</label>
-            <div>
-                @jobs.countries()
-            </div>
+    <div class="field">
+        <label>Country</label>
+        <div>
+            @jobs.countries()
         </div>
     </div>
 

@@ -103,6 +103,24 @@
   border: 2px solid #EEE;
 }
 
+.cards {
+
+  .card {
+    background: white;
+    padding: 24px;
+    margin: 0 0 3px 0;
+  }
+
+  .meta, .posted, .description { color: #999; }
+
+  .meta, .posted { text-transform: uppercase; }
+
+  .meta { float: left; }
+  .posted { float: right; left: inherit; display: inline-block; }
+
+  .title { clear: both; font-size: 20px; font-weight: bold; color: @brand; }
+}
+
 
 @media only screen and (max-width: 768px) {
 
