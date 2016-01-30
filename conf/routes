@@ -21,3 +21,5 @@ DELETE /api/v1/jobs/:id      controllers.api.Jobs.delete(id: Long)
 
 # =====================================================
 GET     /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+
+GET  /images/*file           controllers.Assets.at(path="/public/images", file)
