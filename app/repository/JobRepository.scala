@@ -26,7 +26,7 @@ object JobRepository {
 
   def all(page: Int = 1): List[Job] = DB.withConnection { implicit c =>
     val safePage = (if (page <= 0) 1 else page) - 1
-    SQL("""SELECT * FROM jobs WHERE created > current_date - interval '30 days' ORDER BY id DESC LIMIT 25 OFFSET {offset}""")
+    SQL("""SELECT * FROM jobs WHERE created > current_date - interval '14 days' ORDER BY id DESC LIMIT 25 OFFSET {offset}""")
       .on('offset -> safePage * 25)
       .as(rowParser.*)
   }

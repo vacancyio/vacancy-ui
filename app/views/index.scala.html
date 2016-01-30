@@ -2,23 +2,35 @@
 
 @main("Vacancy.io. All tech jobs, in one place") {
 
-<section id="hero">
+<div id="hero">
     <div class="overlay"></div>
     <div class="content">
         <h1>No Recruiters. Interesting jobs</h1>
         <h2>SELECT * FROM contracts WHERE language IN("Haskell", "Scala")</h2>
         <div class="actions">
             <a href="@routes.Jobs.index()" class="button button-large dark">View Jobs</a>
+            <a href="@routes.Jobs.add()" class="button button-large">Add Job</a>
         </div>
     </div>
-</section>
+</div>
 
 <section id="about" class="section">
 
     <div class="container">
 
-        <div class="tagline col-md-8 col-md-offset-2">
-            <h2>Vacancy matches developers and software engineers with interesting companies and startups</h2>
+        <div class="tagline col-md-12">
+            <h2>Vacancy matches <strong>software engineers</strong> and <strong>designers</strong>
+                with interesting companies and <strong>startups</strong></h2>
+            <ul class="icons">
+                <li><img src="/assets/images/icons/clojure.png" /></li>
+                <li><img src="/assets/images/icons/hackage.png" /></li>
+                <li><img src="/assets/images/icons/python.png" /></li>
+                <li><img src="/assets/images/icons/ruby.png" /></li>
+                <li><img src="/assets/images/icons/php.png" /></li>
+                <li><img src="/assets/images/icons/go.png" /></li>
+                <li><img src="/assets/images/icons/javascript.png" /></li>
+                <li><img src="/assets/images/icons/java.png" /></li>
+            </ul>
         </div>
 
         <div class="logos">

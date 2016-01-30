@@ -3,8 +3,9 @@
 @import "structure.less";
 
 #hero {
+  margin: 0;
   height: 700px;
-  background: @dark url("https://c.stocksy.com/a/8mP300/z0/814068.jpg") no-repeat  50% 60%;
+  background: @dark url("/assets/images/hero2.jpg") no-repeat  50% 50%;
   background-size: cover;
   width: 100%;
   overflow: hidden;
@@ -15,7 +16,7 @@
 
   h1, h2 { color: white; text-align: center; }
 
-  h1 { font-size: 48px; text-transform: uppercase; font-weight: 600; }
+  h1 { font-size: 42px; text-transform: uppercase; font-weight: 600; }
   h2 { color: #EEE; line-height: 1.5; }
 
   .actions { width: 524px; margin: 0 auto; padding: 72px 0 0 0; text-align: center }
@@ -25,10 +26,8 @@
 
 .push { margin-bottom: 12px; }
 
-.section {
-  padding: 48px 0;
-
-  h2 { margin: 0 0 24px 0; }
+section {
+  padding: 6px 0;
 }
 
 #main {
@@ -36,7 +35,12 @@
   background: white;
   padding: 24px 24px 48px 24px;
   overflow: hidden;
+
+  ul { list-style: disc; margin-left: 12px; }
+
 }
+
+#main .wysihtml5-toolbar { margin: 6px 0; }
 
 .search {
   padding: 24px;
@@ -54,21 +58,24 @@
 
 .stretch { min-height: 900px; }
 
+.title { font-weight: bold; text-transform: capitalize; color: @brand; }
+
 .job {
 
   background: white;
   padding: 24px;
   margin: 3px 0;
 
-  .title { font-weight: bold; }
+  .title { font-size: 18px; }
 
   .created, .description, .location, .meta { color: @text; }
 
 }
 
 .info {
+  background: #F5F6F9;
   padding: 24px;
-  border: 2px solid #EEE;
+  border: 2px solid #DEDEDE;
   clear: both;
   overflow: hidden;
   margin: 24px 0;
@@ -80,4 +87,16 @@
 
   #header ul { display: none; }
 
+  #hero h1 { font-size: 32px; }
+
+  #hero h2 { font-size: 24px; }
+
+  #hero .actions { display: none; }
+
 }
+
+.icons { margin: 48px 0 24px 0; }
+
+.icons li { display: inline; margin: 0 0 0 12px; }
+
+.icons img { width: 48px; }
