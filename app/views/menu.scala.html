@@ -1,17 +1,5 @@
-@()(implicit request: play.api.mvc.RequestHeader)
 <ul>
-    @if(request.session.get("email").isEmpty) {
-        <li><a href="@routes.Static.index()">Home</a></li>
-    } else {
-        <li><a href="@routes.Dashboard.employers">Dashboard</a></li>
-    }
-
-    <li><a href="@routes.Jobs.index()">Jobs</a></li>
-    <li><a href="@routes.Jobs.standard()">Post a job</a></li>
-
-    @if(request.session.get("email").isEmpty) {
-        <li><a href="@routes.EmployerAuthentication.login()">Login</a></li>
-    } else {
-        <li><a href="@routes.EmployerAuthentication.logout()">Log out</a></li>
-    }
+  <li><a href="@routes.Static.index()">Home</a></li>
+  <li><a href="@routes.Jobs.index()">Jobs</a></li>
+  <li><a href="@routes.Jobs.add()">Add Job</a></li>
 </ul>

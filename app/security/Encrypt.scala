@@ -3,7 +3,6 @@ package security
 import org.mindrot.jbcrypt.BCrypt
 
 object Encrypt {
-
   /**
    * Encrypts a password
    * @param password A plan text password to be encrypted.

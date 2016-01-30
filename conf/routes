@@ -1,54 +1,23 @@
 GET /                        controllers.Static.index
 
-# Employers
-# =====================================================
-
-GET     /employers/login     controllers.EmployerAuthentication.login
-GET     /employers/logout    controllers.EmployerAuthentication.logout
-POST    /employers/login     controllers.EmployerAuthentication.authenticate
-
-GET     /employers           controllers.Employers.index
-GET     /employers/register  controllers.Employers.register
-GET     /employers/:name     controllers.Employers.show(name: String)
-POST    /employers           controllers.Employers.create
-
-# Dashboards
-# =====================================================
-
-GET     /dashboard           controllers.Dashboard.employers
-
 # Jobs
 # =====================================================
 
-GET     /jobs                controllers.Jobs.index(page: Option[Int] ?= Some(1), query: Option[String] ?= None)
+GET     /jobs                controllers.Jobs.index(page: Option[Int] ?= Some(1), q: Option[String] ?= None)
 POST    /jobs                controllers.Jobs.create
 
-GET     /jobs/new            controllers.Jobs.selection
-GET     /jobs/standard       controllers.Jobs.standard
-GET     /jobs/promoted       controllers.Jobs.promoted
+GET    /jobs/new             controllers.Jobs.add
 
-GET     /jobs/:id            controllers.Jobs.show(id: String)
-GET     /jobs/:id/edit       controllers.Jobs.edit(id: Long)
-
-POST    /jobs/:id            controllers.Jobs.update(id: Long)
-
-# Users
-# =====================================================
-
-GET /users/:username         controllers.Users.show(username: String)
+GET    /jobs/:slug           controllers.Jobs.show(slug: String)
 
 # API
 # =====================================================
 
 GET    /api/v1/jobs          controllers.api.Jobs.index(page: Int ?= 1)
-GET    /api/v1/jobs/:id      controllers.api.Jobs.show(id: Long)
 POST   /api/v1/jobs          controllers.api.Jobs.create
-PUT    /api/v1/jobs/:id      controllers.api.Jobs.update(id: Long)
-DELETE /api/v1/jobs/:id      controllers.api.Jobs.delete(id: Long)
 
-# Promoted
-# =====================================================
-GET    /promoted             controllers.Promoted.index
+GET    /api/v1/jobs/:id      controllers.api.Jobs.show(id: Long)
+DELETE /api/v1/jobs/:id      controllers.api.Jobs.delete(id: Long)
 
 # =====================================================
 GET     /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)

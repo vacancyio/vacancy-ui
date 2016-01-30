@@ -8,90 +8,55 @@ import play.api.db.DB
 import java.util.Date
 
 object JobRepository {
+
   private val rowParser: RowParser[Job] = {
     get[Long]("id") ~
-      get[String]("title") ~
-      get[String]("description") ~
-      get[Option[String]]("skills") ~
-      get[Option[String]]("application") ~
-      get[Int]("contract") ~
-      get[Boolean]("remote") ~
-      get[Option[String]]("city") ~
-      get[String]("country") ~
-      get[Long]("employer_id") ~
-      get[Date]("created") map { 
-        case id ~ title ~ description ~ skills ~ apply ~ contract ~ remote ~ city ~ country ~ employer ~ created =>
-          Job(Some(id), title, description, skills, apply, contract, remote, city, country, employer, created)
+    get[String]("title") ~
+    get[String]("description") ~
+    get[String]("employer") ~
+    get[String]("location") ~
+    get[Option[String]]("application") ~
+    get[Option[String]]("salary") ~
+    get[Boolean]("remote") ~
+    get[Boolean]("contract") ~
+    get[Date]("created") map { case id ~ title ~ description ~ employer ~ location ~ application ~ salary ~ remote ~ contract ~ created =>
+      Job(Some(id), title, description, employer, location, application, salary, remote, contract, created)
     }
   }
 
   def all(page: Int = 1): List[Job] = DB.withConnection { implicit c =>
     val safePage = (if (page <= 0) 1 else page) - 1
-    SQL("""SELECT * FROM jobs WHERE created > current_date - interval '60 days' ORDER BY id DESC LIMIT 25 OFFSET {offset}""")
+    SQL("""SELECT * FROM jobs WHERE created > current_date - interval '30 days' ORDER BY id DESC LIMIT 25 OFFSET {offset}""")
       .on('offset -> safePage * 25)
       .as(rowParser.*)
   }
 
-  def search(query: String) = DB.withConnection { implicit c =>
-    SQL(s"""SELECT * FROM jobs WHERE lower(title) LIKE '${"%" + query.toLowerCase + "%"}' OR lower(description) LIKE '${"%" + query.toLowerCase + "%"}' OR lower(skills) LIKE '${"%" + query.toLowerCase + "%"}'""")
-      .as(rowParser.*)
-  }
-
   def findOneById(id: Long): Option[Job] = DB.withConnection { implicit c =>
-    SQL("SELECT * FROM jobs WHERE id = {id}").on('id -> id).as(rowParser.singleOpt)
+    SQL("SELECT * FROM jobs WHERE id = {id}")
+      .on('id -> id).as(rowParser.singleOpt)
   }
 
-  def findOneByIdForEmployer(employer: Long, id: Long): Option[Job] = DB.withConnection { implicit c =>
-    SQL("SELECT * FROM jobs WHERE id={id} AND employer_id = {employer}")
-      .on('id -> id, 'employer -> employer)
-      .as(rowParser.singleOpt)
-  }
-
-  /**
-   * Insert a job into the database
-   *
-   * A single job is always associated with an employer
-   *
-   * @param employer An employer submitting this job
-   * @param partial The partial form data for this job
-   */
-  def insert(employer: Employer, partial: JobPartial): Option[Long] = DB.withConnection { implicit c =>
-    employer.id flatMap { id =>
-      val fields = "(title, description, skills, application, contract, city, country, employer_id, created)"
-      val values = "({title}, {description}, {skills}, {application}, {contract}, {city}, {country}, {employer}, {created})"
-      SQL(s"INSERT INTO jobs $fields VALUES $values")
-        .on(
-          'title -> partial.title.capitalize,
-          'description -> partial.description,
-          'skills -> partial.skills,
-          'application -> partial.application,
-          'contract -> partial.contract,
-          'city -> partial.city,
-          'country -> partial.country,
-          'employer -> id,
-          'created -> new Date
-        ).executeInsert()
+  def insert(job: Job): Option[Long] = DB.withConnection { implicit c =>
+    SQL(
+      """INSERT INTO jobs (title, description, employer, location, application, salary, remote, contract, created)
+        |VALUES ({title}, {description}, {employer}, {location}, {application}, {salary}, {remote}, {contract}, {created})""".stripMargin)
+      .on('title -> job.title,
+          'description -> job.description,
+          'employer -> job.employer,
+          'location -> job.location,
+          'application -> job.application,
+          'salary -> job.salary,
+          'remote -> job.remote,
+          'contract -> job.contract,
+          'created -> new Date).executeInsert()
     }
+
+  def delete(id: Long) = DB.withConnection { implicit c =>
+    SQL("DELETE FROM jobs WHERE id = {id}").on('id -> id).execute()
   }
 
-  // TODO not working !
-  def update(id: Long, partial: JobPartial): Int = DB.withConnection { implicit c =>
-      SQL(
-        """UPDATE jobs SET title = {title}, description = {description}, skills = {skills}, application = {application},
-          |contract = {contract}, remote = {remote}, city = {city}, country = {country} WHERE id = {id}""".stripMargin).on(
-        'id    -> id,
-        'title -> partial.title,
-        'description -> partial.description,
-        'skills -> partial.skills,
-        'application -> partial.application,
-        'contract -> partial.contract,
-        'remote -> partial.remote,
-        'city -> partial.city,
-        'country -> partial.country
-      ).executeUpdate()
-  }
-
-  def forEmployer(id: Long): List[Job] = DB.withConnection { implicit c =>
-    SQL("SELECT * FROM jobs WHERE employer_id = {id}").on('id -> id).as(rowParser.*)
+  def search(query: String) = DB.withConnection { implicit c =>
+    SQL(s"""SELECT * FROM jobs WHERE lower(title) LIKE '${"%" + query.toLowerCase + "%"}' OR lower(description) LIKE '${"%" + query.toLowerCase + "%"}'""")
+      .as(rowParser.*)
   }
 }

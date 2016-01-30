@@ -3,6 +3,7 @@ package helpers
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import play.twirl.api.HtmlFormat
+import java.util.Date
 
 object Format {
   /**
@@ -13,7 +14,7 @@ object Format {
    */
   def pluralize(n: Int, s: String) = if (n == 1) s else s ++ "s"
 
-  def humanDate(date: java.util.Date): String = {
+  def humanDate(date: Date): String = {
     val format = DateTimeFormat.forPattern("d MMM")
     format.print(new DateTime(date))
   }

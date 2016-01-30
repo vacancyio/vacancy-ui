@@ -1,39 +1,46 @@
-@(jobs: Seq[model.Job])(implicit request: play.api.mvc.RequestHeader)
+@(jobs: Seq[model.Job])
 
 @import helpers._
-@import analysis.JobAnalysis
 
 @main("Hiring") {
 
-<div class="container">
+    <div class="container stretch">
 
     <div class="search">
-        <form action="/jobs">
-            <div class="col-md-6">
-                <input type="text" name="query" placeholder="Search e.g Haskell developer"/>
+        <form class="search-form" action="/jobs" method="get">
+            <div class="input-group input-group-lg">
+                <input type="text" name="q" id="q" placeholder="Ruby developer..." class="form-control">
+                <span class="input-group-btn"><button class="btn btn-primary" type="submit">Search</button></span>
             </div>
         </form>
     </div>
 
     @if(jobs.isEmpty) {
       <div class="info">
-          <div class="col-md-12">No jobs found. Sorry : (</div>
+          <div class="col-md-12">No jobs found</div>
       </div>
     }
 
     <ul class="cards">
         @jobs.map { job =>
-            <li class="card">
-                <a href="@routes.Jobs.show(job.slug)">
-                    <div class="meta">London, Full Time</div>
-                    <div class="posted">2 days ago</div>
-                    <div class="title">@job.title</div>
-                    <div class="description">A description of the job goes in here</div>
+            <li class="job">
+                <a href="@routes.Jobs.show(model.Job.generateSlug(job.id, job.title))">
+                    <div class="created">@Format.humanDate(job.created)</div>
+                    <div class="title">@job.title at @job.employer</div>
+                    <div class="location">@job.location</div>
+                    <div class="meta">
+                    @if(job.remote) {
+                      Remote
+                    }
+                    @if(job.contract) {
+                      Contract
+                    }
+                    </div>
                 </a>
             </li>
         }
     </ul>
 
-</div>
+    </div>
 
 }

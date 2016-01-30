@@ -4,7 +4,7 @@
 
 #hero {
   height: 700px;
-  background: @dark url("/assets/images/hero.jpg") no-repeat  50% 40%;
+  background: @dark url("https://c.stocksy.com/a/8mP300/z0/814068.jpg") no-repeat  50% 60%;
   background-size: cover;
   width: 100%;
   overflow: hidden;
@@ -23,6 +23,8 @@
   .button { display: inline; width: 250px; margin-right: 24px; }
 }
 
+.push { margin-bottom: 12px; }
+
 .section {
   padding: 48px 0;
 
@@ -30,97 +32,47 @@
 }
 
 #main {
-  margin: 24px 0;
+  margin: 24px auto;
   background: white;
   padding: 24px 24px 48px 24px;
-  min-height: 950px;
   overflow: hidden;
 }
 
 .search {
-  padding: 24px 0;
-  margin: 0 0 24px 0;
-}
-
-.jobs h4 { text-transform: capitalize; margin: 0; }
-
-.job, .employer {
-  padding: 24px 0;
-  border-bottom: 2px solid #e2e2e2;
+  padding: 24px;
+  margin: 12px 0;
+  background: white;
   clear: both;
   overflow: hidden;
-  position: relative;
 
-  .title {
-      font-weight: bold; margin: 0 0 6px 0; padding: 0;
-  }
-
-  .summary {color: @text; }
-
-  .meta { color: @text; }
-
-  .tags { color: @text; margin: 0 0 6px 0; }
+  form { margin: 0; }
 }
+
+.job-form { padding: 0 48px; }
 
 .tags li { display: inline-block; margin: 3px; background: #eee; padding: 3px 6px; }
 
-.job:first-child { border-top: 2px solid #e2e2e2; }
+.stretch { min-height: 900px; }
 
-.banner {
+.job {
 
-    padding-bottom: 36px; border-bottom: 6px solid @text; margin-bottom: 24px;
-
-    h3 { color: @text; }
-}
-
-.pricing {
-  background: #fafafa;
-  border: 2px solid #eee;
+  background: white;
   padding: 24px;
-}
+  margin: 3px 0;
 
-.dialog { padding: 0 0 48px 0; text-align: center; }
+  .title { font-weight: bold; }
 
-.lang{
-  display: inline;
-  input[type=checkbox] { display: inline-block; }
-}
+  .created, .description, .location, .meta { color: @text; }
 
-.contracts {
-  margin-left: 24px;
-}
-
-.employer-banner {
-  background: url(/assets/images/employer.jpg) center;
-  background-size: cover;
-  height: 350px;
-  clear: both;
-  margin: 0 0 24px 0;
 }
 
 .info {
   padding: 24px;
   border: 2px solid #EEE;
+  clear: both;
+  overflow: hidden;
+  margin: 24px 0;
 }
-
-.cards {
-
-  .card {
-    background: white;
-    padding: 24px;
-    margin: 0 0 3px 0;
-  }
-
-  .meta, .posted, .description { color: #999; }
-
-  .meta, .posted { text-transform: uppercase; }
-
-  .meta { float: left; }
-  .posted { float: right; left: inherit; display: inline-block; }
-
-  .title { clear: both; font-size: 20px; font-weight: bold; color: @brand; }
-}
-
 
 @media only screen and (max-width: 768px) {
 

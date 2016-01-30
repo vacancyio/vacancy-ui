@@ -1,0 +1,17 @@
+@(jobForm: Form[model.JobPartial])(implicit messages: Messages, request: play.api.mvc.RequestHeader)
+
+@page("Add a job") {
+
+<h2>Hire someone to join your company</h2>
+
+<div class="info">
+  <p>Creating a job is currently free. Your job will be listed here for 30 days.
+      We only accept software engineering, design and tech roles.</p>
+  <p>Try and give enough information to help candidates make an informed decision.
+     Information about salary, remote working and technical skills can help candidates in understanding the role.
+  </p>
+</div>
+
+  @form(jobForm)
+
+}

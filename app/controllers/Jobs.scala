@@ -1,31 +1,29 @@
 package controllers
 
-import model.{Job, JobPartial}
+import model._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
 import repository.JobRepository
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
-import security.EmployerSecuredAction
 
-class Jobs extends Controller with EmployerSecuredAction {
+class Jobs extends Controller  {
 
-  private val jobForm = Form(
+  private val form = Form(
     mapping(
       "title" -> nonEmptyText,
       "description" -> nonEmptyText,
-      "skills" -> optional(text),
+      "employer" -> nonEmptyText,
+      "location" -> nonEmptyText,
       "application" -> optional(text),
-      "contract" -> number,
+      "salary" -> optional(text),
       "remote" -> boolean,
-      "city" -> optional(text),
-      "country" -> text(minLength = 2)
+      "contract" -> boolean
     )(JobPartial.apply)(JobPartial.unapply)
   )
 
-  def index(page: Option[Int] = None, query: Option[String] = None) = Action { implicit request =>
-
+  def index(page: Option[Int] = None, query: Option[String] = None) = Action {
     val jobs = query match {
       case Some(q) => JobRepository.search(q)
       case None    => JobRepository.all(page.getOrElse(1))
@@ -34,58 +32,26 @@ class Jobs extends Controller with EmployerSecuredAction {
     Ok(views.html.jobs.index(jobs))
   }
 
-  def show(slug: String) = Action { implicit request =>
-    val id = slug.split("-").head.toLong
+  def show(slug: String) = Action {
+    val id = slug.split("-").headOption map (_.toLong) getOrElse 1L
     JobRepository.findOneById(id) map { job =>
       Ok(views.html.jobs.show(job))
     } getOrElse NotFound
   }
 
-  def edit(id: Long) = withEmployer { employer => { implicit request =>
-    val maybeJob = employer.id flatMap { employerID => JobRepository.findOneByIdForEmployer(employerID, id) }
-    maybeJob map { job =>
-      val partial = JobPartial(job.title, job.description, job.skills, job.application, job.contract, job.remote, job.city, job.country)
-      Ok(views.html.jobs.edit(job, jobForm.fill(partial)))
-    } getOrElse NotFound
-  }}
-
-  def update(id: Long) = withEmployer { employer => { implicit request =>
-    jobForm.bindFromRequest.fold(
-      formWithErrors => {
-        JobRepository.findOneById(id) map { job =>
-          Ok(views.html.jobs.edit(job, formWithErrors))
-        } getOrElse NotFound
-      },
-      jobPartial => {
-        JobRepository.update(id, jobPartial)
-        Redirect(routes.Jobs.show(Job.generateSlug(Some(id), jobPartial.title)))
-          .flashing("success" -> "Job updated successfully")
-      }
-    )
-  }}
-
-  def selection = Action { implicit request =>
-    Ok(views.html.jobs.selection())
+  def add = Action { implicit request =>
+    Ok(views.html.jobs.add(form))
   }
 
-  def promoted = Action { NotImplemented }
-
-  def standard = withEmployer { employer => { implicit request =>
-    Ok(views.html.jobs.standard(jobForm))
-  }}
-
-  def create = withEmployer { employer => { implicit request =>
-    jobForm.bindFromRequest.fold(
+  def create = Action { implicit request =>
+    form.bindFromRequest.fold(
       formWithErrors => {
-        Ok(views.html.jobs.standard(formWithErrors))
-          .flashing("error" -> "Form contains errors")
+        Ok(views.html.jobs.add(formWithErrors)).flashing("error" -> "Form contains errors")
       },
       jobPartial => {
-        println(request.body)
-        JobRepository.insert(employer, jobPartial) // TODO check for errors!
-        Redirect(routes.Jobs.index())
-          .flashing("success" -> "Job added successfully")
+        JobRepository.insert(Job.fromPartial(jobPartial))
+        Redirect(routes.Jobs.index()).flashing("success" -> "Job added successfully")
       }
     )
-  }}
+  }
 }

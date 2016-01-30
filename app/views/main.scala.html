@@ -1,4 +1,4 @@
-@(title: String)(content: Html)(implicit request: play.api.mvc.RequestHeader)
+@(title: String)(content: Html)
 
 <html lang="en">
     <head>
@@ -12,7 +12,9 @@
     </head>
     <body>
         @header()
+
         @content
+
         @footer()
     </body>
 </html>
