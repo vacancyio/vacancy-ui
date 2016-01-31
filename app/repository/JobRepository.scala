@@ -51,6 +51,27 @@ object JobRepository {
           'created -> new Date).executeInsert()
     }
 
+  def update(job: Job): Option[Int] = DB.withConnection { implicit c =>
+    job.id map { id =>
+      val query = SQL(
+        """
+          |UPDATE jobs SET title={title}, description={description}, employer={employer}, location={location},
+          |application={application}, salary={salary}, remote={remote}, contract={contract}
+          |WHERE id = {id}
+        """.stripMargin).on(
+        'id -> id,
+        'title -> job.title,
+        'description -> job.description,
+        'employer -> job.employer,
+        'location -> job.location,
+        'application -> job.application,
+        'salary -> job.salary,
+        'remote -> job.remote,
+        'contract -> job.contract)
+      query.executeUpdate()
+    }
+  }
+
   def delete(id: Long) = DB.withConnection { implicit c =>
     SQL("DELETE FROM jobs WHERE id = {id}").on('id -> id).execute()
   }

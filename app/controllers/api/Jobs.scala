@@ -1,5 +1,6 @@
 package controllers.api
 
+import controllers.api.security.APISecuredAction
 import model._
 import play.api.libs.json._
 import play.api.mvc._
@@ -17,18 +18,31 @@ class Jobs extends Controller {
     } getOrElse NotFound
   }
 
+  def update(id: Long) = APISecuredAction(parse.json) { request =>
+    if (JobRepository.findOneById(id).isDefined) {
+      request.body.validate[JobPartial].map { case partial =>
+        val job = Job.fromPartial(partial).copy(id = Some(id))
+        JobRepository.update(job)
+        Ok(Json.toJson(job))
+      }.recoverTotal { e => BadRequest(JsError.toJson(e.errors)) }
+    } else NotFound
+  }
+
   def create = Action(parse.json) { request =>
     request.body.validate[JobPartial].map { case partial =>
       val job = Job.fromPartial(partial)
       JobRepository.insert(job)
-      Ok(Json.toJson(job))
+      Created(Json.toJson(job))
     }.recoverTotal{
       e => BadRequest(JsError.toJson(e.errors))
     }
   }
 
   def delete(id: Long) = Action {
-    JobRepository.delete(id)
-    Accepted
+    if (JobRepository.findOneById(id).isDefined) {
+      JobRepository.delete(id)
+      Ok
+    }
+    else NotFound
   }
 }

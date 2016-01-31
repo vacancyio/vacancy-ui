@@ -17,7 +17,9 @@ GET    /api/v1/jobs          controllers.api.Jobs.index(page: Int ?= 1)
 POST   /api/v1/jobs          controllers.api.Jobs.create
 
 GET    /api/v1/jobs/:id      controllers.api.Jobs.show(id: Long)
+PUT    /api/v1/jobs/:id      controllers.api.Jobs.update(id: Long)
 DELETE /api/v1/jobs/:id      controllers.api.Jobs.delete(id: Long)
+
 
 # =====================================================
 GET     /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
