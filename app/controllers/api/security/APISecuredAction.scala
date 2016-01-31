@@ -7,6 +7,11 @@ import scala.concurrent.Future
 
 class AuthenticatedRequest[A](request: Request[A]) extends WrappedRequest[A](request)
 
+/**
+  * This can be used to implement HTTP basic authentication for API requests
+  *
+  * def index = APISecuredAction { OK }
+  */
 object APISecuredAction extends ActionBuilder[AuthenticatedRequest] {
 
   import play.api.Play.current

@@ -28,7 +28,7 @@ class Jobs extends Controller {
     } else NotFound
   }
 
-  def create = Action(parse.json) { request =>
+  def create = APISecuredAction(parse.json) { request =>
     request.body.validate[JobPartial].map { case partial =>
       val job = Job.fromPartial(partial)
       JobRepository.insert(job)
@@ -38,7 +38,7 @@ class Jobs extends Controller {
     }
   }
 
-  def delete(id: Long) = Action {
+  def delete(id: Long) = APISecuredAction {
     if (JobRepository.findOneById(id).isDefined) {
       JobRepository.delete(id)
       Ok

@@ -19,7 +19,16 @@ object Job {
   implicit val format = Json.format[Job]
 
   def fromPartial(partial: JobPartial) =
-    Job(None, partial.title, partial.description, partial.employer, partial.location, partial.application, partial.salary, partial.remote, partial.contract)
+    Job(
+      None,
+      partial.title,
+      partial.description,
+      partial.employer,
+      partial.location,
+      partial.application,
+      partial.salary,
+      partial.remote,
+      partial.contract)
 
   def normalizeTitle(title: String) =
     title.toLowerCase.replace(" ", "-")
