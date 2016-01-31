@@ -30,8 +30,18 @@ object Job {
       partial.remote,
       partial.contract)
 
-  def normalizeTitle(title: String) =
-    title.toLowerCase.replace(" ", "-")
+  /**
+    * Normalize a job title. We need to strip out any strange chars here to make the URL more readable
+    *
+    */
+  def normalizeTitle(title: String) = {
+    val replacementTable =
+      Map(" " -> "-",
+          "," -> "")
+    replacementTable.foldLeft(title.toLowerCase)((acc, kv) =>
+      acc.replace(kv._1, kv._2)
+    )
+  }
 
   /**
     * Generates a URL slug in the form "34-senior-software-engineer"

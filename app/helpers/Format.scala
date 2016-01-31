@@ -19,16 +19,7 @@ object Format {
     format.print(new DateTime(date))
   }
 
-  def formatInput(input: String): String =
-    HtmlFormat.escape(input).toString().replace("\n", "<br />")
+  def dash(input: String): String = input.split(" ").mkString("-")
 
-  /**
-   * Helper function for formatting company names that may contain spaces
-   *
-   */
-  def dash(input: String): String =
-    input.split(" ").mkString("-")
-
-  def unDash(input: String): String =
-    input.split("-").mkString(" ")
+  def unDash(input: String): String = input.split("-").mkString(" ")
 }
