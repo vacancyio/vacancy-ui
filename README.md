@@ -7,6 +7,8 @@ has 3 core components
 2. A notification service which dispatches Twitter and Email notifications when jobs are added
 3. A crawler which finds and posts software engineering jobs 
 
+# Preview
+
 ![](https://raw.githubusercontent.com/owainlewis/vacancy-ui/master/public/images/preview.png)
 
 ## API Docs
