@@ -1,0 +1,30 @@
+@(form: Form[model.UserPartial])(implicit messages: Messages, token: play.filters.csrf.CSRF.Token)
+
+@import helper.CSRF
+
+@page("Register your account") {
+
+    @helper.form(CSRF(routes.Users.create)) {
+
+        <h1>Sign up</h1>
+
+        <p>
+            Create an account and we'll send you regular emails with interesting jobs matching your skills and interests.
+            We can notify you when programming or design jobs get added that match your interests.
+        </p>
+
+        <div class="field">
+            @helper.inputText(form("username"), '_label -> "Username")
+        </div>
+        <div class="field">
+            @helper.inputText(form("email"), '_label -> "Email")
+        </div>
+        <div class="field">
+            @helper.inputPassword(form("password"), '_label -> "Password")
+        </div>
+        <div class="push">
+            <input type="submit" class="button button-medium" value="Register"/>
+        </div>
+    }
+
+}
