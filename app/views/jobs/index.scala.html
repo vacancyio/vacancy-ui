@@ -26,7 +26,7 @@
             <li class="job">
                 <a href="@routes.Jobs.show(model.Job.generateSlug(job.id, job.title))">
                     <div class="created">@Format.humanDate(job.created)</div>
-                    <div class="title">@job.title at @job.employer</div>
+                    <div class="title">@job.title @@ @job.employer</div>
                     <div class="location">@job.location</div>
                     <div class="meta">
                     @if(job.remote) {
@@ -36,6 +36,10 @@
                       Contract
                     }
                     </div>
+                    <ul class="tags">
+                        @TagExtraction.tagsForJob(job).map { tag =>
+                        <li class="tag">@tag</li>}
+                    </ul>
                 </a>
             </li>
         }

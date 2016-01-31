@@ -54,14 +54,11 @@ section {
 
 .job-form { padding: 0 48px; }
 
-.tags li { display: inline-block; margin: 3px; background: #eee; padding: 3px 6px; }
-
 .stretch { min-height: 900px; }
 
 .title { font-weight: bold; text-transform: capitalize; color: @brand; }
 
 .job {
-
   background: white;
   padding: 24px;
   margin: 3px 0;
@@ -69,6 +66,13 @@ section {
   .title { font-size: 18px; }
 
   .created, .description, .location, .meta { color: @text; }
+}
+
+.tags, #main .tags {
+
+  margin: 12px 0;
+
+  li { display: inline-block; margin: 3px 0; background: #eee; padding: 3px 6px; font-weight: bold; color: @text; }
 
 }
 

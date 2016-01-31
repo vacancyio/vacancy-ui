@@ -1,19 +1,25 @@
 @(job: model.Job)
 
-@import helpers.Format
+@import helpers._
 
 @page("Job listing") {
 
-  <h2 class="title">@job.title at @job.employer</h2>
+  <h2 class="title">@job.title @@ @job.employer</h2>
 
-  <section>@helpers.Format.humanDate(job.created)</section>
+  <section>@Format.humanDate(job.created)</section>
+
+  <ul class="tags">
+    @TagExtraction.tagsForJob(job).map { tag =>
+    <li class="tag">@tag</li>}
+  </ul>
 
   <section>
-    @job.location
+    <strong>@job.location</strong>
   </section>
 
   <section class="description">
     @Html(job.description)
   </section>
+
 
 }
