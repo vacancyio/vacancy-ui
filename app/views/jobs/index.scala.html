@@ -1,10 +1,10 @@
-@(jobs: Seq[model.Job])
+@(pages: Long, jobs: Seq[model.Job])
 
 @import helpers._
 
 @main("Hiring") {
 
-    <div class="container stretch">
+<div class="container stretch">
 
     <div class="search">
         <form class="search-form" action="/jobs" method="get">
@@ -41,6 +41,11 @@
         }
     </ul>
 
-    </div>
+    <ul class="pagination">
+      @for(n <- 0L to pages) {
+        <li><a href="/jobs?page=@(n+1)">Page @(n+1)</a></li>
+      }
+    </ul>
+</div>
 
 }

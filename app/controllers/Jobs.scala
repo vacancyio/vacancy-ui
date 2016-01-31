@@ -24,12 +24,15 @@ class Jobs extends Controller  {
   )
 
   def index(page: Option[Int] = None, query: Option[String] = None) = Action {
+
+    val pagesTotal = JobRepository.totalJobs / JobRepository.jobsPerPage
+
     val jobs = query match {
       case Some(q) => JobRepository.search(q)
       case None    => JobRepository.all(page.getOrElse(1))
     }
 
-    Ok(views.html.jobs.index(jobs))
+    Ok(views.html.jobs.index(pagesTotal, jobs))
   }
 
   def show(slug: String) = Action {

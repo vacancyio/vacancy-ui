@@ -9,6 +9,8 @@ import java.util.Date
 
 object JobRepository {
 
+  val jobsPerPage = 25
+
   private val rowParser: RowParser[Job] = {
     get[Long]("id") ~
     get[String]("title") ~
@@ -26,9 +28,13 @@ object JobRepository {
 
   def all(page: Int = 1): List[Job] = DB.withConnection { implicit c =>
     val safePage = (if (page <= 0) 1 else page) - 1
-    SQL("""SELECT * FROM jobs WHERE created > current_date - interval '14 days' ORDER BY id DESC LIMIT 25 OFFSET {offset}""")
-      .on('offset -> safePage * 25)
+    SQL("""SELECT * FROM jobs WHERE created > current_date - interval '14 days' ORDER BY id DESC LIMIT {perPage} OFFSET {offset}""")
+      .on('offset -> safePage * jobsPerPage, 'perPage -> jobsPerPage)
       .as(rowParser.*)
+  }
+
+  def totalJobs: Long = DB.withConnection { implicit c =>
+    SQL("SELECT count(*) FROM jobs").executeQuery().as(scalar[Long].single)
   }
 
   def findOneById(id: Long): Option[Job] = DB.withConnection { implicit c =>
