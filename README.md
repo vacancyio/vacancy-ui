@@ -9,7 +9,7 @@ has 3 core components
 
 # Preview
 
-![](https://raw.githubusercontent.com/owainlewis/vacancy-ui/master/public/images/preview.png)
+![](https://raw.githubusercontent.com/owainlewis/vacancy-ui/master/public/images/preview.png#)
 
 ## API Docs
 
