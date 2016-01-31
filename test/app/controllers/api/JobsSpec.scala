@@ -20,7 +20,6 @@ class JobsSpec extends Specification with ControllerTestHelpers {
 
     "return a single job by id" in new WithApplication {
       val response = route(FakeRequest(GET, "/api/v1/jobs/1"))
-      // response map status mustEqual Some(OK)
     }
   }
 }
