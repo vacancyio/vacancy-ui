@@ -32,8 +32,6 @@ dockerEntrypoint := Seq("bin/vacacny", "-Dconfig.resource=application.prod.conf"
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
-// Play provides two styles of routers, one expects its actions to be injected, the
-// other, legacy style, accesses its actions statically.
 routesGenerator := InjectedRoutesGenerator
 
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
