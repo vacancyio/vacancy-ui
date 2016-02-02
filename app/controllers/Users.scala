@@ -11,9 +11,8 @@ import play.api.cache.Cache
 
 class Users extends Controller {
 
-  private def clearCache() = {
+  private def clearCache() =
     Cache.remove("static.index")
-  }
 
   private val userRegistrationForm = Form(
     mapping("email" -> email, "password" -> nonEmptyText)(UserPartial.apply)(UserPartial.unapply)

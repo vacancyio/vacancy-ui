@@ -1,5 +1,6 @@
 package model
 
+import java.security.MessageDigest
 import java.util.Date
 
 import play.api.libs.json._
@@ -10,7 +11,10 @@ case class User(id: Option[Long],
                 email: String,
                 password: String,
                 avatar: Option[String],
-                created: Date)
+                created: Date) {
+
+  def avatarURL = avatar.getOrElse(User.gravatarURL(email))
+}
 
 object User {
 
@@ -23,4 +27,14 @@ object User {
     UserRepository.findOneByEmail(email) exists { user =>
       Encrypt.checkPassword(password, user.password)
     }
+
+  def gravatarURL(email: String) = {
+    val md = MessageDigest.getInstance("MD5")
+    val digest = md.digest(email.trim.toLowerCase.getBytes)
+    val hexDigits = "0123456789abcdef".toCharArray
+    val hash = digest.foldLeft("") {
+      case (xs, x) => xs + hexDigits((x >> 4) & 0xf) + hexDigits(x & 0xf)
+    }
+    s"http://www.gravatar.com/avatar/$hash"
+  }
 }
