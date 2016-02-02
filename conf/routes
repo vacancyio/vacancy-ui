@@ -20,6 +20,7 @@ GET   /logout                controllers.Users.logout
 
 POST  /authenticate          controllers.Users.authenticate
 
+GET   /users/:id             controllers.Users.show(id: Long)
 POST  /users                 controllers.Users.create
 
 # API

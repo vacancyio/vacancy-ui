@@ -7,8 +7,13 @@ import play.api.data.Forms._
 import play.api.i18n.Messages.Implicits._
 import play.api.mvc._
 import repository.UserRepository
+import play.api.cache.Cache
 
 class Users extends Controller {
+
+  private def clearCache() = {
+    Cache.remove("static.index")
+  }
 
   private val userRegistrationForm = Form(
     mapping("email" -> email, "password" -> nonEmptyText)(UserPartial.apply)(UserPartial.unapply)
@@ -23,6 +28,13 @@ class Users extends Controller {
 
   def register = Action { implicit request =>
     Ok(views.html.users.register(userRegistrationForm))
+  }
+
+  def show(id: Long) = Action { implicit request =>
+    UserRepository.findOneByID(id) match {
+      case Some(user) => Ok(views.html.users.show(user))
+      case None => NotFound
+    }
   }
 
   def create = Action { implicit request =>
@@ -44,8 +56,10 @@ class Users extends Controller {
         Ok(views.html.users.login(formWithErrors))
       },
       user => {
-        if (User.authenticate(user.email, user.password))
+        if (User.authenticate(user.email, user.password)) {
+          clearCache()
           Redirect(routes.Static.index()).withSession("email" -> user.email)
+        }
         else BadRequest(views.html.users.login(loginForm))
       })
   }
