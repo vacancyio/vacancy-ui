@@ -10,6 +10,19 @@ GET    /jobs/new             controllers.Jobs.add
 
 GET    /jobs/:slug           controllers.Jobs.show(slug: String)
 
+# Users
+# =====================================================
+
+GET   /signup                controllers.Users.register
+
+GET   /login                 controllers.Users.login
+GET   /logout                controllers.Users.logout
+
+POST  /authenticate          controllers.Users.authenticate
+
+GET   /users/:id             controllers.Users.show(id: Long)
+POST  /users                 controllers.Users.create
+
 # API
 # =====================================================
 
@@ -19,7 +32,6 @@ POST   /api/v1/jobs          controllers.api.Jobs.create
 GET    /api/v1/jobs/:id      controllers.api.Jobs.show(id: Long)
 PUT    /api/v1/jobs/:id      controllers.api.Jobs.update(id: Long)
 DELETE /api/v1/jobs/:id      controllers.api.Jobs.delete(id: Long)
-
 
 # =====================================================
 GET     /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)

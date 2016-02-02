@@ -13,7 +13,9 @@ object TagExtraction {
     "php",
     "c#",
     "c++",
-    "python"
+    "python",
+    "erlang",
+    "ocaml"
   )
 
   private val frameworks = List(

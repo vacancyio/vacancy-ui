@@ -1,0 +1,20 @@
+@(form: Form[model.LoginData])(implicit messages: Messages, token: play.filters.csrf.CSRF.Token, request: play.api.mvc.RequestHeader)
+
+@import helper.CSRF
+
+@page("User login") {
+
+    <h2>Welcome Back :)</h2>
+
+    @helper.form(CSRF(routes.Users.authenticate)) {
+    <div class="field">
+        @helper.inputText(form("email"), '_label -> "Email")
+    </div>
+    <div class="field">
+        @helper.inputPassword(form("password"), '_label -> "Password")
+    </div>
+    <div class="push">
+        <input type="submit" class="button button-medium" value="Login"/>
+    </div>
+    }
+}
