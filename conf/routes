@@ -13,7 +13,13 @@ GET    /jobs/:slug           controllers.Jobs.show(slug: String)
 # Users
 # =====================================================
 
-GET   /users/new             controllers.Users.registerUser
+GET   /signup                controllers.Users.register
+
+GET   /login                 controllers.Users.login
+GET   /logout                controllers.Users.logout
+
+POST  /authenticate          controllers.Users.authenticate
+
 POST  /users                 controllers.Users.create
 
 # API

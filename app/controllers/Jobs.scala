@@ -23,7 +23,7 @@ class Jobs extends Controller  {
     )(JobPartial.apply)(JobPartial.unapply)
   )
 
-  def index(page: Option[Int] = None, query: Option[String] = None) = Action {
+  def index(page: Option[Int] = None, query: Option[String] = None) = Action { implicit request =>
 
     val pagesTotal = JobRepository.totalJobs / JobRepository.jobsPerPage
 
@@ -35,7 +35,7 @@ class Jobs extends Controller  {
     Ok(views.html.jobs.index(pagesTotal, jobs))
   }
 
-  def show(slug: String) = Action {
+  def show(slug: String) = Action { implicit request =>
     val id = slug.split("-").headOption map (_.toLong) getOrElse 1L
     JobRepository.findOneById(id) map { job =>
       Ok(views.html.jobs.show(job))
