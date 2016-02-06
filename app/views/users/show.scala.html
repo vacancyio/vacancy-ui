@@ -2,8 +2,34 @@
 
 @page("Profile") {
 
-  <h1>@user.email</h1>
+<div class="profile row">
+    <div class="col-md-2">
+        <img class="avatar" src="@user.avatarURL"/>
+    </div>
+    <div class="col-md-10">
 
-  <img src="@user.avatarURL" />
+
+        <h2>Owain Lewis</h2>
+        <h3>Senior Software Engineer, Functional Programmer</h3>
+
+        <div class="push profile-info">
+            Possess four years of graduate research experience, two years of undergraduate research, and two industry summer
+            internships with IBM Research & Development division. Expertise in machine learning, and advanced algorithms
+            with applications in health and accessibility. Impeccable reasoning intuition, with strong written and verbal
+            communication skills, which have led to grant proposal awards, prestigious fellowships recognition, and
+            peer-review publications. Continuous desire for learning and professional growth, while sharing my knowledge
+            with others. US Citizen fluent in English, Spanish, and willing to relocate.
+        </div>
+
+        <div class="profile-contact">
+
+          <h3>Contact</h3>
+
+          <div class="profile-email">Email: owain@@owainlewis.com</div>
+          <div class="profile-github">Github: github.com/owainlewis</div>
+          <div class="profile-website">Website: www.owainlewis.com</div>
+        </div>
+    </div>
+</div>
 
 }

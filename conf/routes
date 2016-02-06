@@ -18,6 +18,8 @@ GET   /signup                controllers.Users.register
 GET   /login                 controllers.Users.login
 GET   /logout                controllers.Users.logout
 
+GET   /user/profile          controllers.Users.profile
+
 POST  /authenticate          controllers.Users.authenticate
 
 GET   /users/:id             controllers.Users.show(id: Long)

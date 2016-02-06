@@ -27,11 +27,9 @@
   <h2>Contract Type</h2>
 
   <div class="field">
-    @helper.checkbox(form("remote"), 'label -> "Allow remote work")
-  </div>
 
-  <div class="field">
-    @helper.checkbox(form("contract"), 'label -> "Is this a contract role?")
+    <label class="checkbox-inline"><input type="checkbox" id="remote" name="remote" value="true">Remote</label>
+    <label class="checkbox-inline"><input type="checkbox" id="contract" name="contract" value="true">Contract</label>
   </div>
 
   <h2>Your Company</h2>

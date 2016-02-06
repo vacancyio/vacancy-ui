@@ -36,6 +36,13 @@ class Users extends Controller {
     }
   }
 
+  def profile = Action { implicit request =>
+    request.session.get("uid") flatMap { uid => UserRepository.findOneByID(uid.toLong) } match {
+      case Some(user) => Ok(views.html.users.show(user))
+      case None => BadRequest(views.html.users.login(loginForm))
+    }
+  }
+
   def create = Action { implicit request =>
     userRegistrationForm.bindFromRequest.fold(
       formWithErrors => {
@@ -44,7 +51,7 @@ class Users extends Controller {
       userPartial => {
         val user = User.fromPartial(userPartial)
         UserRepository.create(user)
-        Redirect(routes.Static.index()).withSession("email" -> user.email)
+        loginUser(user.email)
       }
     )
   }
@@ -55,11 +62,10 @@ class Users extends Controller {
         Ok(views.html.users.login(formWithErrors))
       },
       user => {
-        if (User.authenticate(user.email, user.password)) {
-          clearCache()
-          Redirect(routes.Static.index()).withSession("email" -> user.email)
-        }
-        else BadRequest(views.html.users.login(loginForm))
+        if (User.authenticate(user.email, user.password))
+          loginUser(user.email)
+        else
+          BadRequest(views.html.users.login(loginForm))
       })
   }
 
@@ -71,5 +77,16 @@ class Users extends Controller {
     Redirect(routes.Users.login()).withNewSession.flashing(
       "success" -> "You have been logged out"
     )
+  }
+
+  private def loginUser(email: String)(implicit request: Request[AnyContent]) = {
+    UserRepository.findOneByEmail(email) flatMap (_.id) match {
+      case Some(id) =>
+        clearCache()
+        Redirect(routes.Users.show(id))
+          .withSession("uid" -> id.toString, "email" -> email)
+      case None =>
+        BadRequest(views.html.users.login(loginForm))
+    }
   }
 }

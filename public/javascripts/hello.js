@@ -17,4 +17,6 @@ $(document).ready(function(){
 
     return enableEditor();
 
+    $('').on('load', function(){
+
 });

@@ -4,7 +4,7 @@ import java.util.Date
 import play.api.db.DB
 import anorm._
 import anorm.SqlParser._
-import model.User
+import model.{UserProfile, User}
 
 object UserRepository {
 
@@ -39,5 +39,9 @@ object UserRepository {
           'avatar -> user.avatar,
           'created -> user.created)
       .executeInsert()
+  }
+
+  def updateProfile(profile: UserProfile) = DB.withConnection { implicit c =>
+
   }
 }

@@ -35,6 +35,6 @@ object User {
     val hash = digest.foldLeft("") {
       case (xs, x) => xs + hexDigits((x >> 4) & 0xf) + hexDigits(x & 0xf)
     }
-    s"http://www.gravatar.com/avatar/$hash"
+    s"http://www.gravatar.com/avatar/$hash?s=160"
   }
 }

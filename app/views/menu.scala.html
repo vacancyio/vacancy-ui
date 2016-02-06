@@ -1,12 +1,13 @@
 @()(implicit request: play.api.mvc.RequestHeader)
 <ul>
-  <li><a href="@routes.Static.index()">Home</a></li>
   <li><a href="@routes.Jobs.index()">Jobs</a></li>
   <li><a href="@routes.Jobs.add()">Add Job</a></li>
-  <li><a href="@routes.Users.register()">Signup</a></li>
+  <li><a href="">API</a></li>
   @if(request.session.get("email").isEmpty) {
+      <li><a href="@routes.Users.register()">Signup</a></li>
       <li><a href="@routes.Users.login()">Login</a></li>
   } else {
+     <li><a href="@routes.Users.profile">Profile</a></li>
      <li><a href="@routes.Users.logout()">Logout</a></li>
   }
 </ul>
