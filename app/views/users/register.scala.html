@@ -12,14 +12,14 @@
             <p><strong>Email already exists</strong></p>
         }
 
-<div class="info">
-        <p>Create an account and we'll send you regular emails with interesting jobs matching your skills and interests.
-           We can notify you when programming or design jobs get added that match your interests.
-        </p>
-</div>
+        <div class="info">
+            <p>Create an account and we'll send you regular emails with interesting jobs matching your skills and interests.
+               We can notify you when programming or design jobs get added that match your interests.
+            </p>
+        </div>
 
         <div class="field">
-            @helper.inputText(form("email"), '_label -> "Email")
+            @helper.inputText(form("email"), '_label -> "Email", 'placeholder -> "you@example.com")
         </div>
         <div class="field">
             @helper.inputPassword(form("password"), '_label -> "Password")

@@ -4,7 +4,7 @@ import java.util.Date
 import play.api.db.DB
 import anorm._
 import anorm.SqlParser._
-import model.{UserProfile, User}
+import model.User
 
 object UserRepository {
 
@@ -14,9 +14,8 @@ object UserRepository {
     get[Long]("id") ~
       get[String]("email") ~
       get[String]("password") ~
-      get[Option[String]]("avatar") ~
-      get[Date]("created") map { case id ~ email ~ password ~ avatar ~ created =>
-      User(Some(id), email, password, avatar, created)
+      get[Date]("created") map { case id ~ email ~ password ~ created =>
+      User(Some(id), email, password, created)
     }
   }
 
@@ -33,15 +32,9 @@ object UserRepository {
   }
 
   def create(user: User) = DB.withConnection { implicit c =>
-    SQL("INSERT INTO users (email, password, avatar, created) VALUES ({email}, {password}, {avatar}, {created})")
-      .on('email -> user.email,
-          'password -> user.password,
-          'avatar -> user.avatar,
-          'created -> user.created)
+    SQL("INSERT INTO users (email, password, created) VALUES ({email}, {password}, {created})")
+      .on('email -> user.email, 'password -> user.password, 'created -> user.created)
       .executeInsert()
   }
 
-  def updateProfile(profile: UserProfile) = DB.withConnection { implicit c =>
-
-  }
 }

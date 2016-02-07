@@ -3,6 +3,7 @@
   <li><a href="@routes.Jobs.index()">Jobs</a></li>
   <li><a href="@routes.Jobs.add()">Add Job</a></li>
   <li><a href="">API</a></li>
+
   @if(request.session.get("email").isEmpty) {
       <li><a href="@routes.Users.register()">Signup</a></li>
       <li><a href="@routes.Users.login()">Login</a></li>

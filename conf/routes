@@ -19,6 +19,7 @@ GET   /login                 controllers.Users.login
 GET   /logout                controllers.Users.logout
 
 GET   /user/profile          controllers.Users.profile
+GET   /user/profile/edit     controllers.Users.editProfile
 
 POST  /authenticate          controllers.Users.authenticate
 

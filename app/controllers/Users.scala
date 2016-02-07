@@ -37,9 +37,14 @@ class Users extends Controller {
   }
 
   def profile = Action { implicit request =>
-    request.session.get("uid") flatMap { uid => UserRepository.findOneByID(uid.toLong) } match {
-      case Some(user) => Ok(views.html.users.show(user))
-      case None => BadRequest(views.html.users.login(loginForm))
+    getSessionUser.fold(BadRequest(views.html.users.login(loginForm))) { user =>
+     Ok(views.html.users.show(user))
+    }
+  }
+
+  def editProfile = Action { implicit request =>
+    getSessionUser.fold(BadRequest(views.html.users.login(loginForm))) { user =>
+      Ok(views.html.users.edit(user))
     }
   }
 
@@ -78,6 +83,9 @@ class Users extends Controller {
       "success" -> "You have been logged out"
     )
   }
+
+  private def getSessionUser(implicit request: Request[AnyContent]): Option[User] =
+    request.session.get("uid") flatMap { uid => UserRepository.findOneByID(uid.toLong) }
 
   private def loginUser(email: String)(implicit request: Request[AnyContent]) = {
     UserRepository.findOneByEmail(email) flatMap (_.id) match {

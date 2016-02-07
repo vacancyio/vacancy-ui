@@ -10,10 +10,7 @@ import security.Encrypt
 case class User(id: Option[Long],
                 email: String,
                 password: String,
-                avatar: Option[String],
                 created: Date) {
-
-  def avatarURL = avatar.getOrElse(User.gravatarURL(email))
 }
 
 object User {
@@ -21,14 +18,14 @@ object User {
   implicit val format = Json.format[User]
 
   def fromPartial(partialUser: UserPartial): User =
-    User(None, partialUser.email, Encrypt.encryptPassword(partialUser.password), None, new Date())
+    User(None, partialUser.email, Encrypt.encryptPassword(partialUser.password), new Date())
 
   def authenticate(email: String, password: String): Boolean =
     UserRepository.findOneByEmail(email) exists { user =>
       Encrypt.checkPassword(password, user.password)
     }
 
-  def gravatarURL(email: String) = {
+  def gravatar(email: String): String = {
     val md = MessageDigest.getInstance("MD5")
     val digest = md.digest(email.trim.toLowerCase.getBytes)
     val hexDigits = "0123456789abcdef".toCharArray

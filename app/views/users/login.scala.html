@@ -8,7 +8,7 @@
 
     @helper.form(CSRF(routes.Users.authenticate)) {
     <div class="field">
-        @helper.inputText(form("email"), '_label -> "Email")
+        @helper.inputText(form("email"), '_label -> "Email", 'placeholder -> "you@example.com")
     </div>
     <div class="field">
         @helper.inputPassword(form("password"), '_label -> "Password")
