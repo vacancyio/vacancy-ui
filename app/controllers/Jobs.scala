@@ -1,27 +1,13 @@
 package controllers
 
+import controllers.forms.JobForm
 import model._
-import play.api.data.Form
-import play.api.data.Forms._
-import play.api.mvc._
-import repository.JobRepository
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
+import play.api.mvc._
+import repository.JobRepository
 
-class Jobs extends Controller  {
-
-  private val form = Form(
-    mapping(
-      "title" -> nonEmptyText,
-      "description" -> nonEmptyText,
-      "employer" -> nonEmptyText,
-      "location" -> nonEmptyText,
-      "application" -> optional(text),
-      "salary" -> optional(text),
-      "remote" -> boolean,
-      "contract" -> boolean
-    )(JobPartial.apply)(JobPartial.unapply)
-  )
+class Jobs extends Controller with JobForm {
 
   def index(page: Option[Int] = None, query: Option[String] = None) = Action { implicit request =>
 
@@ -43,11 +29,11 @@ class Jobs extends Controller  {
   }
 
   def add = Action { implicit request =>
-    Ok(views.html.jobs.add(form))
+    Ok(views.html.jobs.add(jobForm))
   }
 
   def create = Action { implicit request =>
-    form.bindFromRequest.fold(
+    jobForm.bindFromRequest.fold(
       formWithErrors => {
         Ok(views.html.jobs.add(formWithErrors)).flashing("error" -> "Form contains errors")
       },
