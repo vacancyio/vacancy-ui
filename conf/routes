@@ -18,8 +18,8 @@ GET   /signup                controllers.Users.register
 GET   /login                 controllers.Users.login
 GET   /logout                controllers.Users.logout
 
-GET   /user/profile          controllers.Users.profile
-GET   /user/profile/edit     controllers.Users.editProfile
+GET   /user/profile          controllers.UserProfiles.show
+GET   /user/profile/edit     controllers.UserProfiles.edit
 
 POST  /authenticate          controllers.Users.authenticate
 

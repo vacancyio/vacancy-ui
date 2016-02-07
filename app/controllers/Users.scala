@@ -1,15 +1,16 @@
 package controllers
 
-import model.{LoginData, User, UserPartial}
+import controllers.forms.UserLoginForm
+import model.{User, UserPartial}
 import play.api.Play.current
+import play.api.cache.Cache
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.i18n.Messages.Implicits._
 import play.api.mvc._
 import repository.UserRepository
-import play.api.cache.Cache
 
-class Users extends Controller {
+class Users extends Controller with UserLoginForm {
 
   private def clearCache() =
     Cache.remove("static.index")
@@ -20,11 +21,6 @@ class Users extends Controller {
         UserRepository.findOneByEmail(data.email).isEmpty
       }))
 
-  private val loginForm = Form(
-    mapping("email" -> email, "password" -> nonEmptyText(minLength = 6))
-    (LoginData.apply)(LoginData.unapply)
-  )
-
   def register = Action { implicit request =>
     Ok(views.html.users.register(userRegistrationForm))
   }
@@ -33,18 +29,6 @@ class Users extends Controller {
     UserRepository.findOneByID(id) match {
       case Some(user) => Ok(views.html.users.show(user))
       case None => NotFound
-    }
-  }
-
-  def profile = Action { implicit request =>
-    getSessionUser.fold(BadRequest(views.html.users.login(loginForm))) { user =>
-     Ok(views.html.users.show(user))
-    }
-  }
-
-  def editProfile = Action { implicit request =>
-    getSessionUser.fold(BadRequest(views.html.users.login(loginForm))) { user =>
-      Ok(views.html.users.edit(user))
     }
   }
 
@@ -83,9 +67,6 @@ class Users extends Controller {
       "success" -> "You have been logged out"
     )
   }
-
-  private def getSessionUser(implicit request: Request[AnyContent]): Option[User] =
-    request.session.get("uid") flatMap { uid => UserRepository.findOneByID(uid.toLong) }
 
   private def loginUser(email: String)(implicit request: Request[AnyContent]) = {
     UserRepository.findOneByEmail(email) flatMap (_.id) match {
