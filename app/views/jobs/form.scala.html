@@ -24,12 +24,13 @@
     @helper.inputText(form("salary"), '_label -> "Salary (optional)", 'placeholder -> "e.g $30-40k")
   </div>
 
-  <h2>Contract Type</h2>
+  <h2>Role Type</h2>
 
   <div class="field">
-
-    <label class="checkbox-inline"><input type="checkbox" id="remote" name="remote" value="true">Remote</label>
-    <label class="checkbox-inline"><input type="checkbox" id="contract" name="contract" value="true">Contract</label>
+    <ul>
+      <li><label class="checkbox"><input type="checkbox" id="remote" name="remote" value="true">Remote</label></li>
+      <li><label class="checkbox"><input type="checkbox" id="contract" name="contract" value="true">Contract</label></li>
+    </ul>
   </div>
 
   <h2>Your Company</h2>

@@ -9,7 +9,13 @@ class Static extends Controller {
 
   def index = Cached("static.index") {
     Action { implicit request =>
-      Ok(views.html.index())
+      Ok(views.html.static.index())
+    }
+  }
+
+  def api = Cached("static.api"){
+    Action { implicit request =>
+      Ok(views.html.static.api())
     }
   }
 }

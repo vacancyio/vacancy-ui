@@ -2,6 +2,4 @@ package controllers
 
 trait UserSecuredAction {
 
-
-
 }

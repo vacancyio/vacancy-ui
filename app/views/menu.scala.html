@@ -2,11 +2,13 @@
 <ul>
   <li><a href="@routes.Jobs.index()">Jobs</a></li>
   <li><a href="@routes.Jobs.add()">Add Job</a></li>
-  <li><a href="">API</a></li>
+  <!--<li><a href="@routes.Static.api()">API</a></li> -->
 
   @if(request.session.get("email").isEmpty) {
+      <!--
       <li><a href="@routes.Users.register()">Signup</a></li>
       <li><a href="@routes.Users.login()">Login</a></li>
+      -->
   } else {
      <li><a href="@routes.UserProfiles.show">Profile</a></li>
      <li><a href="@routes.Users.logout()">Logout</a></li>
