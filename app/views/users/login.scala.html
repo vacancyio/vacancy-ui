@@ -6,6 +6,8 @@
 
     <h2>Welcome Back</h2>
 
+    <p>We are currently in private beta</p>
+
     @helper.form(CSRF(routes.Users.authenticate)) {
     <div class="field">
         @helper.inputText(form("email"), '_label -> "Email", 'placeholder -> "you@example.com")

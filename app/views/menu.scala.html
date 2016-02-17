@@ -6,9 +6,9 @@
 
   @if(request.session.get("email").isEmpty) {
       <!--
-      <li><a href="@routes.Users.register()">Signup</a></li>
-      <li><a href="@routes.Users.login()">Login</a></li>
+      <li><a href="@routes.Users.register()">Sign Up</a></li>
       -->
+      <li><a href="@routes.Users.login()">Sign In</a></li>
   } else {
      <li><a href="@routes.UserProfiles.show">Profile</a></li>
      <li><a href="@routes.Users.logout()">Logout</a></li>
