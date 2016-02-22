@@ -2,59 +2,66 @@
 
 @main("Vacancy.io. All tech jobs, in one place") {
 
-<div id="hero">
-    <div class="overlay"></div>
-    <div class="content">
-        <h1>Technical Recruitment ++</h1>
-        <h2>Vacancy recommends high quality software engineering <br/>opportunities
-            matching your skills and interests</h2>
-        <div class="actions">
-            <a href="@routes.Jobs.index()" class="button button-large dark">View Jobs</a>
-            <a href="@routes.Jobs.add()" class="button button-large">Add Job</a>
+    <div id="hero">
+
+        @header()
+
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>Land your perfect job</h1>
+
+            <h2>Vacancy recommends high quality software engineering <br/>opportunities
+                matching your skills and interests</h2>
+
+            <div class="actions">
+                <a href="@routes.Jobs.index()" class="button button-large dark">View Jobs</a>
+                <a href="@routes.Jobs.add()" class="button button-large">Add Job</a>
+            </div>
         </div>
     </div>
-</div>
 
-<section id="about" class="section">
+    <section id="about" class="section">
+        <div class="container">
 
-    <div class="container">
+            <div class="tagline col-md-12">
+                <h2>Vacancy matches <strong>technical candidates</strong> with interesting <br/>
+                    <strong>companies</strong> and <strong>startups</strong></h2>
+                <ul class="icons">
+                    <li><img src="assets/images/clojure.png"/></li>
+                    <li><img src="assets/images/hackage.png"/></li>
+                    <li><img src="assets/images/python.png"/></li>
+                    <li><img src="assets/images/ruby.png"/></li>
+                    <li><img src="assets/images/php.png"/></li>
+                    <li><img src="assets/images/go.png"/></li>
+                    <li><img src="assets/images/javascript.png"/></li>
+                    <li><img src="assets/images/java.png"/></li>
+                </ul>
+            </div>
 
-        <div class="tagline col-md-12">
-            <h2>Vacancy matches <strong>technical candidates</strong> with interesting <br/>
-                <strong>companies</strong> and <strong>startups</strong></h2>
-            <ul class="icons">
-                <li><img src="assets/images/clojure.png" /></li>
-                <li><img src="assets/images/hackage.png" /></li>
-                <li><img src="assets/images/python.png" /></li>
-                <li><img src="assets/images/ruby.png" /></li>
-                <li><img src="assets/images/php.png" /></li>
-                <li><img src="assets/images/go.png" /></li>
-                <li><img src="assets/images/javascript.png" /></li>
-                <li><img src="assets/images/java.png" /></li>
-            </ul>
+            <div class="logos">
+
+            </div>
+        </div>
+    </section>
+
+    <div class="split row">
+        <div class="split-a col-md-6">
         </div>
 
-        <div class="logos">
-
-        </div>
-
-        <div class="col-md-6">
+        <div class="split-b col-md-6">
+            <div>
             <h2>For candidates</h2>
-            <p>Traditional recruitment is a frustrating process filled with misinformation and hard to find data.
-                As software developers we deserve something better. Vacancy collects high quality programming
-                jobs (remote, contract, freelance and full time) from around the web and organizes them in one, easily searchable place.</p>
-            <p>We even provide a simple JSON API for you to integrate into your own apps.</p>
-        </div>
 
-        <div class="col-md-6">
+            <p>Vacancy collects high quality programming jobs (remote, contract, freelance and full time)
+                from around the web and organizes them in one, easily
+                searchable place.</p>
+
             <h2>For employers</h2>
-            <p>Find talented people to join your team from a growing community of talented software engineers</p>
-            <p>It's free to start engaging with software engineers and programmers looking for new opportunities.
-               When you create a job we'll push out a notification to people that might be interested and promote your
-               role on social media.
-            </p>
+
+            <p>Find talented people to join your team from a growing community of talented software engineers.
+                It's free to start engaging with software engineers and programmers looking for new opportunities.</p>
+            </div>
         </div>
     </div>
-</section>
 
 }
