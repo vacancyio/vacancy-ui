@@ -15,7 +15,6 @@ case class Job(id: Option[Long],
                created: Date = new Date)
 
 object Job {
-
   implicit val format = Json.format[Job]
 
   def fromPartial(partial: JobPartial) =
@@ -29,11 +28,7 @@ object Job {
       partial.salary,
       partial.remote,
       partial.contract)
-
-  /**
-    * Normalize a job title. We need to strip out any strange chars here to make the URL more readable
-    *
-    */
+  
   def normalizeTitle(title: String) = {
     val replacementTable =
       Map(" " -> "-",
@@ -42,7 +37,7 @@ object Job {
       acc.replace(kv._1, kv._2)
     )
   }
-
+  
   /**
     * Generates a URL slug in the form "34-senior-software-engineer"
     *
@@ -55,4 +50,3 @@ object Job {
     s"$normalisedId-$normalisedTitle"
   }
 }
-
